@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+// 不显示浏览器滚动条
+body::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// vue-router过渡动画
+.v-enter {
+  opacity: 0;
+}
+
+.v-enter-active {
+  transition: .5s;
+}
+
+.v-enter-to {
+  opacity: 1;
+}
+
+.v-leave {
+  opacity: 1;
+}
+
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-leave-active {
+  transition: 0.5s;
+}
+
+// 背景动效渐变
+.bg-img-ani {
+  background-image: linear-gradient(125deg,
+      #2c3e50,
+      #27ae60,
+      #2980b9,
+      #e74c3c,
+      #8e44ad);
+  background-size: 400%;
+  animation: bganimation 15s infinite;
+  opacity: .8;
+}
+
+@keyframes bganimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+// body::-webkit-scrollbar {
+//   width: 0;
+// }
+
+
+/*左侧菜单栏滚动条样式*/
+// ::-webkit-scrollbar {
+//   float: right;
+//   width: 8px;
+//   height: 8px;
+// }
+
+// ::-webkit-scrollbar-track {
+//   /*background: rgba(43,70,109,1);*/
+//   border-radius: 8px;
+// }
+
+// ::-webkit-scrollbar-track-piece {
+//   /*内层轨道，滚动条中间部分（位置4）*/
+//   border-radius: 2px 2px 0px 0px;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background: #6E8EBA;
+//   border-radius: 6px;
+// }
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #5176AA;
+// }
+
+// ::-webkit-scrollbar-corner {
+//   background: #f6f6f6;
+// }
