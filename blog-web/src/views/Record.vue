@@ -2,10 +2,10 @@
   <div class="record-page">
     <ul class="record-list">
       <h2>收藏的大神文章</h2>
-      <li class="record-item" v-for="n in 20" :key="n">
-        <span class="item-index">{{n}}</span>
-        <span class="item-date">【2019-11-6】</span>
-        <span class="item-title pointer">从多线程来看 Event Loop</span>
+      <li class="record-item" v-for="(item, index) in recordList" :key="item._id">
+        <span class="item-index">{{index + 1}}</span>
+        <span class="item-date">【{{item.updated}}】</span>
+        <a :href="item.url" target="_blank" class="item-title pointer">{{item.title}}</a>
       </li>
     </ul>
   </div>
@@ -14,7 +14,19 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      recordList: []
+    };
+  },
+  methods: {
+    async getrecord() {
+      const res = await this.$http.get("/record");
+      this.recordList = res.data.record;
+      console.log(res);
+    }
+  },
+  created() {
+    this.getrecord();
   }
 };
 </script>
@@ -49,8 +61,11 @@ export default {
         text-align: center;
         line-height: 30px;
       }
-      .item-title:hover {
-        color: $tx-record-hover;
+      .item-title {
+        text-decoration: none;
+        &:hover {
+          color: $tx-record-hover;
+        }
       }
     }
   }

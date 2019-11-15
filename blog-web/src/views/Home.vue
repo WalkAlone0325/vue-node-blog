@@ -13,11 +13,11 @@
       <div class="home-left">123</div>
       <div class="home-skill">
         <h1>我的技能：</h1>
-        <div class="skill-box" v-for="item in skills" :key="item.index">
-          <p>{{item.title}}</p>
-          <p>{{item.width}}</p>
+        <div class="skill-box" v-for="item in skills" :key="item._id">
+          <p>{{item.name}}</p>
+          <p>{{item.progress_bar}}%</p>
           <div class="skill">
-            <div class="skill-level" :style="{width: item.width}"></div>
+            <div class="skill-level" :style="{width: `${item.progress_bar}%`}"></div>
           </div>
         </div>
       </div>
@@ -29,15 +29,17 @@
 export default {
   data() {
     return {
-      skills: [
-        { title: "HTML5", width: "90%" },
-        { title: "CSS3", width: "75%" },
-        { title: "JS", width: "60%" },
-        { title: "Vue", width: "81%" },
-        { title: "React", width: "58%" },
-        { title: "Node", width: "70%" }
-      ]
+      skills: []
     };
+  },
+  methods: {
+    async getSkill() {
+      const res = await this.$http("/skill");
+      this.skills = res.data;
+    }
+  },
+  created() {
+    this.getSkill();
   }
 };
 </script>

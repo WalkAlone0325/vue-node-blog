@@ -4,9 +4,9 @@
       <h3>标签分类</h3>
       <hr />
       <ul>
-        <li class="pointer" v-for="item in tags" :key="item._id">
-          <span class="tag-name">{{ item.name }}</span>
-          <span class="article-count">{{ item.count }}篇</span>
+        <li class="pointer" @click="filterTagArticle" v-for="item in tagList" :key="item._id">
+          <span class="tag-name">{{ item.tag }}</span>
+          <span class="article-count">{{ count.total }}篇</span>
         </li>
       </ul>
     </div>
@@ -15,18 +15,15 @@
 
 <script>
 export default {
+  props: { tagList: Array, count: Object },
   data() {
-    return {
-      tags: [
-        { name: "全部", count: 20 },
-        { name: "Vue", count: 2 },
-        { name: "React", count: 6 },
-        { name: "Node", count: 1 },
-        { name: "Js", count: 10 },
-        { name: "HTML", count: 10 },
-        { name: "CSS", count: 8 }
-      ]
-    };
+    return {};
+  },
+  methods: {
+    // 过滤得到标签文章
+    filterTagArticle() {
+      this.$emit("getTagArticle", "爸爸,我知道错了");
+    }
   }
 };
 </script>

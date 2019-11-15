@@ -26,17 +26,18 @@ export default {
   data() {
     return {
       login: true,
-      menuList: [
-        { name: "首页", path: "/home" },
-        { name: "文章", path: "/article" },
-        { name: "作品", path: "/project" },
-        { name: "收录", path: "/record" },
-        { name: "关于", path: "/about" },
-        { name: "简历", path: "/remuse" }
-      ]
+      menuList: []
     };
   },
-  methods: {}
+  methods: {
+    async getMenu() {
+      const res = await this.$http("/menu");
+      this.menuList = res.data;
+    }
+  },
+  created() {
+    this.getMenu();
+  }
 };
 </script>
 

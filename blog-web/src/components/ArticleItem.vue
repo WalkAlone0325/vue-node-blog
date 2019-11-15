@@ -1,26 +1,44 @@
 <template>
-  <router-link to="/article/1" tag="div" class="article-item">
-    <div class="article-content">
-      <div class="article-header">
-        <h2 class="article-title pointer">Vue 源码分析</h2>
-        <span class="article-tags">标签：javascript Vue</span>
+  <div>
+    <router-link
+      :to="`/article/${item._id}`"
+      tag="div"
+      class="article-item"
+      v-for="item in articleList"
+      :key="item._id"
+    >
+      <div class="article-content">
+        <div class="article-header">
+          <h2 class="article-title pointer">{{item.title}}</h2>
+          <!-- <template v-for="tag in item.tags"> :key="tag._id" -->
+          <span class="article-tags">
+            标签：
+            <span v-for="tag in item.tags" :key="tag._id">
+              <span class="article-tags-tag">{{tag.tag}}</span>
+            </span>
+          </span>
+          <!-- </template> -->
+        </div>
+        <div class="article-img">
+          <img :src="item.image" />
+        </div>
+        <p class="article-intro">{{item.intro}}</p>
       </div>
-      <div class="article-img">
-        <img src="../assets/images/bg1.jpg" />
+      <div class="article-info">
+        <span class="info-date">发布于：{{item.updated | timeFormat}}</span>
+        <span class="info-wdp">
+          <span>观看：2019 &nbsp;</span>
+          <span>点赞：20 &nbsp;</span>
+          <span>评论：20</span>
+        </span>
       </div>
-      <p class="article-intro">asasasa asasas asasas asasa</p>
-    </div>
-    <div class="article-info">
-      <span>发布于：2019-4-20</span>
-      <span>观看：2019</span>
-      <span>点赞：20</span>
-      <span>评论：20</span>
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
+  props: { articleList: { type: Array } },
   data() {
     return {};
   }
@@ -59,6 +77,10 @@ export default {
       .article-tags {
         margin-right: 10px;
         color: $tx-tag;
+
+        .article-tags-tag {
+          margin-right: 6px;
+        }
       }
     }
     .article-img {
@@ -78,6 +100,8 @@ export default {
     }
   }
   .article-info {
+    display: flex;
+    justify-content: space-between;
     color: $color-grey;
   }
 }

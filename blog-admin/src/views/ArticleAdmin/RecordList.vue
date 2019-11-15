@@ -39,7 +39,7 @@
           <el-input v-model="update.title"></el-input>
         </el-form-item>
         <el-form-item label="收录地址" prop="url">
-          <el-input v-model="update.url"></el-input>
+          <el-input type="url" v-model="update.url"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -99,7 +99,13 @@ export default {
       }, // 修改的表单项
       rules: {
         title: [{ required: true, message: "请输入收录标题", trigger: "blur" }],
-        url: [{ required: true, message: "请输入收录地址", trigger: "blur" }]
+        url: [
+          { required: true, message: "请输入收录地址", trigger: "blur" },
+          {
+            pattern: /https?:\/{2}[^\s]*/,
+            message: "地址请以http或https开头字母和数字"
+          }
+        ]
       },
       recordList: [],
       total: 0, // 文章总数

@@ -1,16 +1,22 @@
 <template>
   <div class="detail-page">
     <div class="detail-header">
-      <h1>Vue源码解析</h1>
-      <span class="detail-avatar">作者：独行</span>
-      <span class="detail-date">发布时间：2019-11-6</span>
+      <h1>{{articleItem.title}}</h1>
+      <span class="detail-avatar">作者：{{articleItem.avatar}}</span>
+      <span class="detail-avatar">
+        标签：
+        <span v-for="item in articleItem.tags" :key="item._id">
+          <span class="detail-tag">{{item.tag}}</span>
+        </span>
+      </span>
+      <span class="detail-date">发布时间：{{articleItem.updated | timeFormat}}</span>
     </div>
     <div class="detail-body">
       <div class="detail-left">
         <div class="detail-img">
-          <img src="../assets/images/bg1.jpg" alt />
+          <img :src="articleItem.image" alt />
         </div>
-        <div class="detail-content" v-html="code"></div>
+        <div class="detail-content" v-html="articleItem.body"></div>
       </div>
       <div class="detail-aside">
         <h3>目录</h3>
@@ -28,12 +34,7 @@ import "highlight.js/styles/monokai-sublime.css";
 export default {
   data() {
     return {
-      code:
-        "```javascript\nfunction(){\n\tconsole.log(123)\n}\n" +
-        "javascript\nfunction(){\n\tconsole.log(123)\n}\n" +
-        "javascript\nfunction(){\n\tconsole.log(123)\n}\n" +
-        "javascript\nfunction(){\n\tconsole.log(123)\n}\n" +
-        "```"
+      articleItem: {}
     };
   },
   mounted() {
@@ -51,9 +52,17 @@ export default {
       smartypants: false,
       xhtml: false
     });
-    this.code = marked(this.code);
+    this.articleItem.body = marked(this.code);
   },
-  methods: {},
+  methods: {
+    async getArticleItem() {
+      const res = await this.$http(`/article/${this.$route.params.id}`);
+      this.articleItem = res.data;
+    }
+  },
+  created() {
+    this.getArticleItem();
+  },
   components: {
     // MarkNav
   }
@@ -75,6 +84,9 @@ export default {
       margin: 10px;
       color: #3495db;
       font-size: 18px;
+      .detail-tag {
+        margin-right: 10px;
+      }
     }
   }
   .detail-body {

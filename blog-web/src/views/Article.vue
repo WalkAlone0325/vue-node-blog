@@ -1,12 +1,10 @@
 <template>
   <div class="article-page">
     <!-- 左侧信息栏 -->
-    <!-- <div class="aside-box"> -->
-    <tag-aside></tag-aside>
-    <!-- </div> -->
+    <tag-aside :tagList="tagList" :count="count" @getTagArticle="getTagArticle"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box">
-      <article-item v-for="n in 6" :key="n"></article-item>
+      <article-item :articleList="articleList"></article-item>
     </div>
   </div>
 </template>
@@ -17,7 +15,38 @@ import TagAside from "../components/TagAside";
 
 export default {
   data() {
-    return {};
+    return {
+      articleList: [],
+      tagList: [],
+      count: {
+        total: 0
+      }
+    };
+  },
+  methods: {
+    // 获取各标签文章
+    getTagArticle() {
+      // this.articleList.filter((item, index, newTagList) => {});
+    },
+    async getAtricle() {
+      const res = await this.$http("/article");
+      const newArticle = [];
+      res.data.article.forEach(item => {
+        if (item.resource === "发表") {
+          return newArticle.push(item);
+        }
+      });
+      this.articleList = newArticle;
+      this.count.total = newArticle.length;
+    },
+    async getTag() {
+      const res = await this.$http.get("/tag");
+      this.tagList = res.data;
+    }
+  },
+  created() {
+    this.getAtricle();
+    this.getTag();
   },
   components: {
     ArticleItem,
@@ -33,8 +62,6 @@ export default {
   width: 80%;
   margin: 10px auto;
 
-  .aside-box {
-  }
   .articles-box {
     display: flex;
     flex-direction: column;

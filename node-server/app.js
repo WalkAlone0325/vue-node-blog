@@ -17,6 +17,8 @@ const page = require('./routes/page')
 const record = require('./routes/record')
 const skill = require('./routes/skill')
 
+const web = require('./routes/web/index')
+
 // error handler
 onerror(app)
 
@@ -49,6 +51,7 @@ app.use(tag.routes(), tag.allowedMethods())
 app.use(page.routes(), page.allowedMethods())
 app.use(record.routes(), record.allowedMethods())
 app.use(skill.routes(), skill.allowedMethods())
+app.use(web.routes(), web.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
