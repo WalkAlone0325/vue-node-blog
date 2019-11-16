@@ -28,8 +28,8 @@
           <el-tag
             style="margin: 3px 3px;"
             effect="dark"
-            :type="(row.resource === '发表') ? 'success': 'warning'"
-          >{{ row.resource }}</el-tag>
+            :type="(row.resource === 1) ? 'success': 'warning'"
+          >{{ row.resource === 1 ? '发表' : '草稿' }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="image" label="封面" width="160">
@@ -37,12 +37,12 @@
           <img :src="row.image" style="margin: 0; width: 120px; height: 60px;" />
         </template>
       </el-table-column>
-      <el-table-column sortable prop="created" label="创建时间">
+      <el-table-column sortable prop="created" label="创建时间" width="100">
         <template slot-scope="scope">
           <span>{{scope.row.created | timeFormat}}</span>
         </template>
       </el-table-column>
-      <el-table-column sortable prop="updated" label="更新时间">
+      <el-table-column sortable prop="updated" label="更新时间" width="100">
         <template slot-scope="scope">
           <span>{{scope.row.updated | timeFormat}}</span>
         </template>
@@ -110,7 +110,7 @@ export default {
             type: "success",
             message: "删除成功!"
           });
-          this.getArticle();
+          this.getArticleList();
         })
         .catch(() => {
           this.$message({
@@ -118,23 +118,6 @@ export default {
             message: "已取消删除"
           });
         });
-    },
-
-    changePage(param) {
-      if (param === "x") {
-        if (!this.hasMore) {
-          console.log("已经说最后一页了");
-          return false;
-        }
-        this.page++;
-      } else {
-        if (this.page == 1) {
-          console.log("首页");
-          return false;
-        }
-        this.page--;
-      }
-      this.getArticleList();
     },
 
     // 获取文章列表

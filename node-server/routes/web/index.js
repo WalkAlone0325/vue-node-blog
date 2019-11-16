@@ -21,7 +21,7 @@ router.get('/article', async ctx => {
   const size = Number(reqParam.size) // 每页显示的记录条数
   console.log(ctx.query.page, ctx.query.size)
   // 显示符合前端分页请求的列表查询
-  const res = await Article.find().populate('tags').skip((page - 1) * size).limit(size)
+  const res = await Article.find({ 'resource': { $in: 1 } }).populate('tags').skip((page - 1) * size).limit(size)
   //是否还有更多
   const hasMore = total - (page - 1) * size > size ? true : false
   ctx.response.type = 'application/json'
@@ -62,11 +62,23 @@ router.get('/skill', async ctx => {
 })
 
 router.get('/tag', async ctx => {
-  const { tag } = ctx.query
-  const res = await Tag.find({ tag: "Vue" }).exec(res => {
-    ctx.request.body.data
-  })
-  ctx.body = res
+  const res = await Tag.find()
+  let arr = [
+    { '$unwind': "$tags" },
+    { $match: { resource: 1 } },
+    { '$group': { "_id": "$tags", "count": { '$sum': 1 } } }
+  ]
+
+  let num_list = await Article.aggregate(arr);
+  ctx.body = {
+    code: 200,
+    msg: '获取标签列表成功！',
+    data: res,
+    data: {
+      tag_lists: res,
+      num_list
+    }
+  }
 })
 
 // router.get('/tag', async ctx => {

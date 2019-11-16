@@ -28,11 +28,10 @@ router.post('/article', async (ctx, next) => {
 
 // 删
 router.delete('/article/:id', async ctx => {
-  const data = await Article.findByIdAndDelete(ctx.params.id, ctx.request.body)
+  await Article.findByIdAndDelete(ctx.params.id)
   ctx.body = {
     code: 200,
-    success: true,
-    data
+    success: '删除成功'
   }
 })
 

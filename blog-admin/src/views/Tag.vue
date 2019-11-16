@@ -15,6 +15,9 @@
         <el-form-item label="标签名称" prop="tag">
           <el-input v-model="create.tag"></el-input>
         </el-form-item>
+        <el-form-item label="标签描述" prop="desc">
+          <el-input v-model="create.desc"></el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialog = false">取 消</el-button>
@@ -34,6 +37,9 @@
         <el-form-item label="标签名称" prop="tag">
           <el-input v-model="update.tag"></el-input>
         </el-form-item>
+        <el-form-item label="标签描述" prop="desc">
+          <el-input v-model="update.desc"></el-input>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="updateDialog = false">取 消</el-button>
@@ -49,6 +55,8 @@
           <el-tag style="margin: 0 3px; font-size: 14px" effect="dark">{{ row.tag }}</el-tag>
         </template>
       </el-table-column>
+      <el-table-column prop="desc" label="描述"></el-table-column>
+      <el-table-column prop="numList" label="文章数量"></el-table-column>
       <el-table-column prop="created" label="创建时间">
         <template slot-scope="scope">
           <span>{{scope.row.created | timeFormat}}</span>
@@ -78,11 +86,11 @@ export default {
       updateDialog: false, // 编辑是否显示弹窗
       create: {
         tag: "",
-        create_time: ""
+        desc: ""
       }, // 添加的表单项
       update: {
         tag: "",
-        create_time: ""
+        desc: ""
       }, // 修改的表单项
       rules: {
         name: [
@@ -90,7 +98,7 @@ export default {
           { min: 2, max: 10, message: "长度在 2 到 10 个字符" }
         ]
       },
-      tagsList: []
+      tagsList: [] // 返回带文章数目的标签列表
     };
   },
   methods: {
@@ -119,7 +127,7 @@ export default {
       console.log(tag);
       this.update._id = tag._id;
       this.update.tag = tag.tag;
-      this.update.create_time = tag.create_time;
+      this.update.desc = tag.desc;
       this.updateDialog = true;
     },
 
@@ -166,7 +174,20 @@ export default {
     // 获取标签列表
     async getTag() {
       const res = await this.$http("/tag");
-      this.tagsList = res.data;
+      const tagsList = res.data.data.tags_list;
+      const numList = res.data.data.article_num_list;
+      // console.log(numList, "123" + tagsList);
+      tagsList.forEach(item => {
+        let temp = numList.find(i => {
+          return i._id == item._id;
+        });
+        item.numList = temp == null ? 0 : temp.count;
+      });
+      res.data = tagsList.sort((a, b) => {
+        return a.numList < b.numList;
+      });
+      this.tagsList = tagsList;
+      console.log(tagsList);
     }
   },
   created() {

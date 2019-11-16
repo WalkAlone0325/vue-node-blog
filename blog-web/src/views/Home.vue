@@ -10,7 +10,12 @@
       <div class="title">掘金</div>
     </div>
     <div class="home-section">
-      <div class="home-left">123</div>
+      <div class="home-left">
+        <div class="user-item" v-for="n in 3" :key="n">
+          <img class="user-logo" src="../assets/images/avatar.jpg" alt="图片不见了" />
+          <h3>掘金</h3>
+        </div>
+      </div>
       <div class="home-skill">
         <h1>我的技能：</h1>
         <div class="skill-box" v-for="item in skills" :key="item._id">
@@ -88,6 +93,19 @@ export default {
 
     .home-left {
       flex: 1;
+      .user-item {
+        display: flex;
+        width: 200px;
+        border: 1px solid #000;
+        .user-logo {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+        }
+        h3 {
+          font-size: 26px;
+        }
+      }
     }
     .home-skill {
       width: 40%;

@@ -4,9 +4,7 @@
     <!-- <header></header> -->
     <main class="bg-img-ani">
       <transition mode="out-in">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </transition>
     </main>
     <footer-comp></footer-comp>

@@ -4,9 +4,13 @@
       <h3>标签分类</h3>
       <hr />
       <ul>
-        <li class="pointer" @click="filterTagArticle" v-for="item in tagList" :key="item._id">
+        <li class="pointer">
+          <span class="tag-name" @click="searchTag('')">全部</span>
+          <span class="article-count">【{{tagsList.length}}】篇</span>
+        </li>
+        <li class="pointer" @click="searchTag(item._id)" v-for="item in tagsList" :key="item._id">
           <span class="tag-name">{{ item.tag }}</span>
-          <span class="article-count">{{ count.total }}篇</span>
+          <span class="article-count">【{{ item.numList }}】篇</span>
         </li>
       </ul>
     </div>
@@ -15,14 +19,22 @@
 
 <script>
 export default {
-  props: { tagList: Array, count: Object },
+  // props: { tagList: Array, article_count: Array },
+  props: { tagsList: Array },
   data() {
     return {};
   },
   methods: {
     // 过滤得到标签文章
-    filterTagArticle() {
-      this.$emit("getTagArticle", "爸爸,我知道错了");
+    search() {
+      this.$emit("search_keyword", this.search_val);
+      let page_aside = document.getElementsByClassName("aside-page")[0];
+      page_aside.classList.remove("page_aside_show");
+    },
+    searchTag(val) {
+      this.$emit("searchTag", val);
+      let page_aside = document.getElementsByClassName("aside-page")[0];
+      page_aside.classList.remove("page_aside_show");
     }
   }
 };

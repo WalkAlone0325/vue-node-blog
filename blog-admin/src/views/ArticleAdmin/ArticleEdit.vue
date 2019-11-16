@@ -14,8 +14,7 @@
       </el-form-item>
       <el-form-item label="作者" prop="avatar">
         <el-select v-model="articleForm.avatar" placeholder="请选择作者">
-          <el-option label="独行1" value="独行1"></el-option>
-          <el-option label="独行2" value="独行2"></el-option>
+          <el-option label="独行" value="独行"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="标签" prop="tags">
@@ -41,8 +40,8 @@
 
       <el-form-item label="状态" prop="resource">
         <el-select v-model="articleForm.resource" placeholder="请选择状态">
-          <el-option label="草稿" value="草稿"></el-option>
-          <el-option label="发表" value="发表"></el-option>
+          <el-option label="草稿" value="0"></el-option>
+          <el-option label="发表" value="1"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="文章内容" prop="body">
@@ -65,29 +64,16 @@ export default {
   props: { id: {} },
   data() {
     return {
-      taglists: [
-        {
-          value: "HTML",
-          label: "HTML"
-        },
-        {
-          value: "CSS",
-          label: "CSS"
-        },
-        {
-          value: "JavaScript",
-          label: "JavaScript"
-        }
-      ],
+      taglists: [],
       value: [],
       // 上面是文章标签
       articleForm: {
         title: "",
-        avatar: "",
+        avatar: "独行",
         tags: "",
         image: "",
         intro: "",
-        resource: "", // 状态
+        resource: null, // 状态 0 草稿， 1 发表
         body: ""
       },
       rules: {
@@ -164,7 +150,8 @@ export default {
     // 获取标签列表
     async getTagList() {
       const res = await this.$http.get("/tag");
-      this.taglists = res.data;
+      this.taglists = res.data.data.tags_list;
+      console.log(res.data.data.tags_list);
     },
 
     // 获取文章详情列表

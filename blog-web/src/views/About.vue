@@ -27,5 +27,8 @@ export default {
 .about-page {
   width: 80%;
   margin: 0 auto;
+  .about-content {
+    color: #000;
+  }
 }
 </style>

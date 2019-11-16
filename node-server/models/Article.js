@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
   tags: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Tag' }],
   image: String,
   intro: String,
-  resource: String,
+  resource: Number, // 0 => 存为草稿  1=> 已发表
   body: String,
 
   views_number: Number,

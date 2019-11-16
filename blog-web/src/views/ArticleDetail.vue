@@ -1,6 +1,6 @@
 <template>
   <div class="detail-page">
-    <div class="detail-header">
+    <div class="detail-header" :style="`background-image:url(${articleItem.image});`">
       <h1>{{articleItem.title}}</h1>
       <span class="detail-avatar">作者：{{articleItem.avatar}}</span>
       <span class="detail-avatar">
@@ -13,14 +13,13 @@
     </div>
     <div class="detail-body">
       <div class="detail-left">
-        <div class="detail-img">
-          <img :src="articleItem.image" alt />
+        <div class="detail-content">
+          <!-- v-html="code" -->
+          <div ref="content" v-html="code"></div>
         </div>
-        <div class="detail-content" v-html="articleItem.body"></div>
       </div>
       <div class="detail-aside">
         <h3>目录</h3>
-        <!-- <MarkNav class="detail-nav" :source="code" headingTopOffset="0" ordered="false" /> -->
       </div>
     </div>
   </div>
@@ -34,8 +33,12 @@ import "highlight.js/styles/monokai-sublime.css";
 export default {
   data() {
     return {
-      articleItem: {}
+      articleItem: {},
+      code: ""
     };
+  },
+  created() {
+    this.getArticleItem();
   },
   mounted() {
     marked.setOptions({
@@ -52,16 +55,16 @@ export default {
       smartypants: false,
       xhtml: false
     });
-    this.articleItem.body = marked(this.code);
+    // this.code = marked(content);
+    // console.log(123, marked(that.code));
   },
+
   methods: {
     async getArticleItem() {
       const res = await this.$http(`/article/${this.$route.params.id}`);
       this.articleItem = res.data;
+      this.code = marked(res.data.body);
     }
-  },
-  created() {
-    this.getArticleItem();
   },
   components: {
     // MarkNav
@@ -78,8 +81,11 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 240px;
+    height: 300px;
     background: $color-grey;
+    h1 {
+      color: $color-white;
+    }
     .detail-avatar {
       margin: 10px;
       color: #3495db;
@@ -88,22 +94,17 @@ export default {
         margin-right: 10px;
       }
     }
+    .detail-date {
+      color: $color-white;
+    }
   }
   .detail-body {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
     .detail-left {
       width: 80%;
-      .detail-img {
-        margin-bottom: 20px;
-        img {
-          width: 100%;
-          max-width: 100%;
-          max-height: 400px;
-        }
-      }
       .detail-content {
         height: auto;
         flex: 1;
