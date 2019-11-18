@@ -4,7 +4,6 @@ const router = require('koa-router')({
 
 const About = require('../../models/About')
 const Article = require('../../models/Article')
-const Menu = require('../../models/Menu')
 const Record = require('../../models/Record')
 const Skill = require('../../models/Skill')
 const Tag = require('../../models/Tag')
@@ -14,31 +13,33 @@ router.get('/about', async ctx => {
   ctx.body = res
 })
 
-router.get('/article', async ctx => {
-  const total = await Article.countDocuments() // 文章总数
-  const reqParam = ctx.query
-  const page = Number(reqParam.page) // 当前第几页
-  const size = Number(reqParam.size) // 每页显示的记录条数
-  console.log(ctx.query.page, ctx.query.size)
-  // 显示符合前端分页请求的列表查询
-  const res = await Article.find({ 'resource': { $in: 1 } }).populate('tags').skip((page - 1) * size).limit(size)
-  //是否还有更多
-  const hasMore = total - (page - 1) * size > size ? true : false
-  ctx.response.type = 'application/json'
-  //返回给前端
-  ctx.body = { hasMore: hasMore, article: res, total: total }
-})
+// 文章列表
+// router.get('/article', async ctx => {
+//   const total = await Article.countDocuments() // 文章总数
+//   const reqParam = ctx.query
+//   const page = Number(reqParam.page) // 当前第几页
+//   const size = Number(reqParam.size) // 每页显示的记录条数
+//   const tag = reqParam.tag // 标签
+//   console.log(tag)
+//   let querys = {}
+//   if (tag != '') {
+//     querys.tags = { $in: [tag] }
+//   }
+//   // 显示符合前端分页请求的列表查询
+//   // , 'resource': { $in: 1 }
+//   const res = await Article.find({ 'resource': { $in: 1 } }).populate('tags').skip((page - 1) * size).limit(size)
+//   console.log(querys)
+//   //是否还有更多
+//   const hasMore = total - (page - 1) * size > size ? true : false
+//   ctx.response.type = 'application/json'
+//   //返回给前端
+//   ctx.body = { hasMore: hasMore, article: res, total: total }
+// })
 
 // 文章详情数据
 router.get('/article/:id', async ctx => {
   const article = await Article.findById(ctx.params.id).populate('tags')
   ctx.body = article
-})
-
-router.get('/menu', async ctx => {
-  const menus = await Menu.find(ctx.request.body)
-  // console.log(ctx)
-  ctx.body = menus
 })
 
 router.get('/record', async ctx => {
@@ -85,5 +86,46 @@ router.get('/tag', async ctx => {
 //   const tag = await Tag.find(ctx.request.body)
 //   ctx.body = tag
 // })
+
+// 标签获取文章列表
+router.get('/article', async ctx => {
+  let { tag = '' } = ctx.query
+  try {
+    let querys = {}
+    querys.resource = { $in: 1 }
+    if (tag != '') {
+      querys.tags = { $in: [tag] }
+    }
+    const res = await Article.find(querys).populate({
+      path: 'tags',
+      select: "_id tag desc"
+    })
+    ctx.body = {
+      code: 200,
+      msg: '查询成功！',
+      article: res
+    }
+  } catch (error) {
+    console.log(error);
+    ctx.body = {
+      code: 500,
+      msg: '获取文章失败！'
+    }
+  }
+})
+
+// 获取归档列表
+router.get('/archives', async ctx => {
+  const archiveList = await Article.find({ 'resource': { $in: 1 } }, {
+    title: true,
+    created: true,
+    updated: true
+  }).sort({ 'created': '-1' })
+  ctx.body = {
+    code: 200,
+    msg: '归档列表查询成功',
+    archiveList
+  }
+})
 
 module.exports = router

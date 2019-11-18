@@ -1,5 +1,8 @@
 <template>
-  <footer class="footer-page">这是底部，独行的博客</footer>
+  <!-- <footer class="footer-page">这是底部，独行的博客</footer> -->
+  <div class="footer-page">
+    <footer>这是底部，独行的博客</footer>
+  </div>
 </template>
 
 <script>
@@ -10,15 +13,18 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../assets/scss/variables";
 
 .footer-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $color-white;
-  height: 60px;
   background: $color-footer;
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    color: $color-white;
+  }
 }
 </style>

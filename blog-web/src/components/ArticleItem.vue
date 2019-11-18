@@ -35,16 +35,10 @@
 <script>
 export default {
   props: { articleList: { type: Array } },
-  // inject: ["reload"],
   data() {
     return {};
   },
-  methods: {
-    // toDetail(_id) {
-    //   this.reload();
-    //   this.$router.push(`/article/${_id}`);
-    // }
-  }
+  methods: {}
 };
 </script>
 

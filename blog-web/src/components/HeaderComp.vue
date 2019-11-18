@@ -26,17 +26,15 @@ export default {
   data() {
     return {
       login: true,
-      menuList: []
+      menuList: [
+        { name: "首页", path: "/home" },
+        { name: "文章", path: "/article" },
+        { name: "归档", path: "/archives" },
+        { name: "作品", path: "/project" },
+        { name: "收录", path: "/record" },
+        { name: "关于", path: "/about" }
+      ]
     };
-  },
-  methods: {
-    async getMenu() {
-      const res = await this.$http("/menu");
-      this.menuList = res.data;
-    }
-  },
-  created() {
-    this.getMenu();
   }
 };
 </script>
@@ -44,12 +42,9 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 .header-page {
-  width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100;
+  z-index: 999;
   background-color: $color-header;
   header {
     width: 80%;

@@ -1,5 +1,6 @@
 <template>
   <div class="home-page">
+    <!-- 头部 -->
     <div class="home-info">
       <div class="title">github</div>
       <div class="info">
@@ -9,13 +10,8 @@
       </div>
       <div class="title">掘金</div>
     </div>
+    <!-- 技能和社区链接 -->
     <div class="home-section">
-      <div class="home-left">
-        <div class="user-item" v-for="n in 3" :key="n">
-          <img class="user-logo" src="../assets/images/avatar.jpg" alt="图片不见了" />
-          <h3>掘金</h3>
-        </div>
-      </div>
       <div class="home-skill">
         <h1>我的技能：</h1>
         <div class="skill-box" v-for="item in skills" :key="item._id">
@@ -24,6 +20,19 @@
           <div class="skill">
             <div class="skill-level" :style="{width: `${item.progress_bar}%`}"></div>
           </div>
+        </div>
+      </div>
+
+      <div class="home-right">
+        <div class="user-item">
+          <img class="user-logo" src="../assets/images/avatar.jpg" alt="图片不见了" />
+          <h3>掘金</h3>
+          <p>掘金是一个帮助开发者成长的社区</p>
+        </div>
+        <div class="user-item">
+          <img class="user-logo" src="../assets/images/avatar.jpg" alt="图片不见了" />
+          <h3>掘金</h3>
+          <p>掘金是一个帮助开发者成长的社区</p>
         </div>
       </div>
     </div>
@@ -91,12 +100,17 @@ export default {
     display: flex;
     background: $color-white;
 
-    .home-left {
+    .home-right {
       flex: 1;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
       .user-item {
         display: flex;
-        width: 200px;
-        border: 1px solid #000;
+        flex-direction: column;
+        align-items: center;
+        width: 260px;
+        // border: 1px solid #000;
         .user-logo {
           width: 120px;
           height: 120px;

@@ -15,15 +15,9 @@
 <style lang="scss" scoped>
 .loading-page {
   ul {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    padding: 0;
     display: flex;
-    background: #ffffff;
-
+    justify-content: center;
+    align-items: center;
     li {
       list-style: none;
       width: 40px;

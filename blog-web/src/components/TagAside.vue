@@ -26,15 +26,8 @@ export default {
   },
   methods: {
     // 过滤得到标签文章
-    search() {
-      this.$emit("search_keyword", this.search_val);
-      let page_aside = document.getElementsByClassName("aside-page")[0];
-      page_aside.classList.remove("page_aside_show");
-    },
     searchTag(val) {
       this.$emit("searchTag", val);
-      let page_aside = document.getElementsByClassName("aside-page")[0];
-      page_aside.classList.remove("page_aside_show");
     }
   }
 };
@@ -45,9 +38,8 @@ export default {
   position: sticky;
   top: 70px;
   width: 24%;
-  height: auto;
-  max-height: 400px;
   margin-right: 10px;
+  padding-bottom: 10px;
   background: #f1f1f1;
   &:hover {
     transition: 1s ease;

@@ -1,11 +1,11 @@
 <template>
   <div class="article-page">
     <!-- 左侧信息栏 -->
-    <!-- :tagList="tagList" :article_count="article_count" -->
-    <tag-aside :tagsList="tagsList"></tag-aside>
+    <tag-aside @searchTag="searchTag" :tagsList="tagsList"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box">
       <article-item :articleList="articleList"></article-item>
+      <!-- <loading-comp></loading-comp> -->
     </div>
   </div>
 </template>
@@ -13,19 +13,33 @@
 <script>
 import ArticleItem from "../components/ArticleItem";
 import TagAside from "../components/TagAside";
+// import LoadingComp from "../components/LoadingComp";
 
 export default {
   data() {
     return {
       articleList: [],
-      tagsList: []
+      tagsList: [],
+      tag: ""
     };
   },
   methods: {
+    // 过滤文章
+    searchTag(val) {
+      console.log(val, this.articleList);
+      this.tag = val;
+      this.getAtricle();
+    },
+
     // 获取文章列表
     async getAtricle() {
-      const res = await this.$http("/article");
+      const res = await this.$http.get("/article", {
+        params: {
+          tag: this.tag || ""
+        }
+      });
       this.articleList = res.data.article;
+      // console.log(res.data.article);
     },
     async getTag() {
       const res = await this.$http.get("/tag");
@@ -52,6 +66,7 @@ export default {
   components: {
     ArticleItem,
     TagAside
+    // LoadingComp
   }
 };
 </script>
@@ -59,6 +74,7 @@ export default {
 <style lang="scss">
 .article-page {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   width: 80%;
   margin: 10px auto;

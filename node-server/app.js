@@ -9,7 +9,6 @@ const cors = require('koa2-cors')
 require('./db/config')(app)
 
 
-const menu = require('./routes/menu')
 const article = require('./routes/article')
 const user = require('./routes/user')
 const tag = require('./routes/tag')
@@ -44,7 +43,6 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(menu.routes(), menu.allowedMethods())
 app.use(user.routes(), user.allowedMethods())
 app.use(article.routes(), article.allowedMethods())
 app.use(tag.routes(), tag.allowedMethods())
