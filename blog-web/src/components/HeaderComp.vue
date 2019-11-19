@@ -10,11 +10,14 @@
             class="nav-item"
             v-for="(item, index) in menuList"
             :key="index"
-          >{{item.name}}</router-link>
+            >{{ item.name }}</router-link
+          >
         </ul>
       </nav>
       <div class="header-la">
-        <router-link to="/login" tag="button" class="login" v-if="login">登录/注册</router-link>
+        <router-link to="/login" tag="button" class="login" v-if="login"
+          >登录/注册</router-link
+        >
         <div class="avatar" v-else></div>
       </div>
     </header>
@@ -45,7 +48,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 999;
-  background-color: $color-header;
+  background-image: $bg-img;
   header {
     width: 80%;
     height: 60px;

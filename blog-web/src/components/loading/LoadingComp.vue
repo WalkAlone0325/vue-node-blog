@@ -20,8 +20,8 @@
     align-items: center;
     li {
       list-style: none;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       background: #ffffff;
       border-radius: 50%;
       animation: animate 1.6s ease-in-out infinite;

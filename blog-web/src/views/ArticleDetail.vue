@@ -1,15 +1,18 @@
 <template>
   <div class="detail-page">
     <div class="detail-header" :style="`background-image:url(${articleItem.image});`">
-      <h1>{{articleItem.title}}</h1>
-      <span class="detail-avatar">作者：{{articleItem.avatar}}</span>
+      <h1>{{ articleItem.title }}</h1>
       <span class="detail-avatar">
-        标签：
+        <i class="fa fa-user"></i>
+        {{ articleItem.avatar }}
+      </span>
+      <span class="detail-avatar">
+        <i class="fa fa-tags"></i>
         <span v-for="item in articleItem.tags" :key="item._id">
-          <span class="detail-tag">{{item.tag}}</span>
+          <span class="detail-tag">{{ item.tag }}</span>
         </span>
       </span>
-      <span class="detail-date">发布时间：{{articleItem.updated | timeFormat}}</span>
+      <span class="detail-date">发布时间：{{ articleItem.updated | timeFormat }}</span>
     </div>
     <div class="detail-body">
       <div class="detail-left">
@@ -156,18 +159,21 @@ export default {
     height: 300px;
     background: $color-grey;
     h1 {
-      color: $color-black;
+      color: #2095db;
     }
     .detail-avatar {
       margin: 10px;
       color: #3495db;
       font-size: 18px;
-      .detail-tag {
+      .fa-user {
         margin-right: 10px;
+      }
+      .detail-tag {
+        margin: 0 10px;
       }
     }
     .detail-date {
-      color: $color-black;
+      color: #2095db;
     }
   }
   .detail-body {

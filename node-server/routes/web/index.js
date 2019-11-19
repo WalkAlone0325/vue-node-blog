@@ -4,6 +4,7 @@ const router = require('koa-router')({
 
 const About = require('../../models/About')
 const Article = require('../../models/Article')
+const Project = require('../../models/Project')
 const Record = require('../../models/Record')
 const Skill = require('../../models/Skill')
 const Tag = require('../../models/Tag')
@@ -11,6 +12,15 @@ const Tag = require('../../models/Tag')
 router.get('/about', async ctx => {
   const res = await About.find()
   ctx.body = res
+})
+
+router.get('/project', async ctx => {
+  const res = await Project.find()
+  ctx.body = {
+    code: 200,
+    msg: '获取标签列表成功！',
+    data: res
+  }
 })
 
 // 文章列表
@@ -89,21 +99,27 @@ router.get('/tag', async ctx => {
 
 // 标签获取文章列表
 router.get('/article', async ctx => {
-  let { tag = '' } = ctx.query
+  let { tag = '', page = '', size = '' } = ctx.query
   try {
     let querys = {}
     querys.resource = { $in: 1 }
+    // querys.page = 
     if (tag != '') {
       querys.tags = { $in: [tag] }
     }
+    const total = await Article.countDocuments()
     const res = await Article.find(querys).populate({
       path: 'tags',
       select: "_id tag desc"
     })
+    //是否还有更多
+    const hasMore = total - (page - 1) * size > size ? true : false
     ctx.body = {
       code: 200,
       msg: '查询成功！',
-      article: res
+      article: res,
+      total,
+      hasMore
     }
   } catch (error) {
     console.log(error);

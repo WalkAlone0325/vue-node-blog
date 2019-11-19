@@ -1,105 +1,137 @@
 <template>
-  <div>
-    <div v-for="item in articleList" :key="item._id" class="article-item">
-      <router-link :to="`/article/${item._id}`" tag="div">
-        <div class="article-content">
-          <div class="article-header">
-            <h2 class="article-title pointer">{{item.title}}</h2>
-            <!-- <template v-for="tag in item.tags"> :key="tag._id" -->
-            <span class="article-tags">
-              标签：
-              <span v-for="tag in item.tags" :key="tag._id">
-                <span class="article-tags-tag">{{tag.tag}}</span>
-              </span>
+  <div class="article-item-container">
+    <router-link
+      class="article-item pointer"
+      v-for="item in articleList"
+      :key="item._id"
+      :to="`/article/${item._id}`"
+      tag="div"
+    >
+      <img :src="item.image" alt="图片不见了" />
+      <div class="image-content">
+        <div class="content-header">
+          <div class="title-info">
+            <h1>{{ item.title }}</h1>
+            <p>{{ item.intro }}</p>
+          </div>
+          <span>
+            <i class="fa fa-tags"></i>
+            <span v-for="tag in item.tags" :key="tag._id">
+              <span style="margin-left: 6px">{{ tag.tag }}</span>
             </span>
-            <!-- </template> -->
-          </div>
-          <div class="article-img">
-            <img :src="item.image" />
-          </div>
-          <p class="article-intro">{{item.intro}}</p>
-        </div>
-        <div class="article-info">
-          <span class="info-date">发布于：{{item.updated | timeFormat}}</span>
-          <span class="info-wdp">
-            <span>观看：2019 &nbsp;</span>
-            <span>点赞：20 &nbsp;</span>
-            <span>评论：20</span>
           </span>
         </div>
-      </router-link>
-    </div>
+        <div class="content-footer">
+          <span>
+            发布于：
+            {{ item.updated | timeFormat }}
+          </span>
+          <div class="icons">
+            <i class="icon fas fa-heart">123</i>
+            <i class="icon fas fa-comment">123</i>
+            <i class="icon fas fa-share">123</i>
+          </div>
+        </div>
+      </div>
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
-  props: { articleList: { type: Array } },
-  data() {
-    return {};
-  },
-  methods: {}
+  props: { articleList: { type: Array } }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
-
-.article-item {
-  width: 100%;
-  height: 450px;
-  margin-bottom: 10px;
-  padding: 0 20px;
-  border-radius: 6px;
-  background-image: $bg-img;
-  transition: all 0.5s ease-out;
-  &:hover {
-    box-shadow: 0 0 3px 3px $bg-hover;
-    transition: all 0.5s ease-in;
-    img {
-      cursor: pointer;
+.article-item-container {
+  .article-item {
+    position: relative;
+    width: 90%;
+    height: 252px;
+    margin: 0 30px 15px;
+    overflow: hidden;
+    &:hover img {
       transform: scale(1.1);
-      transition: all 0.5s ease-in;
     }
-  }
-
-  .article-content {
-    .article-header {
+    img {
+      width: 100%;
+      height: 100%;
+      transition: 0.4s;
+    }
+    .image-content {
+      width: 100%;
+      height: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      .article-title {
-        color: $color-white;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      color: #fff;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.5);
+        width: 100%;
+        height: 0;
+        clip-path: polygon(60% 100%, 100% 0, 100% 100%);
+        transition: 0.5s;
       }
-      .article-tags {
-        margin-right: 10px;
-        color: $tx-tag;
+      &:hover::before {
+        height: 100px;
+      }
+      &:hover .content-footer > .icons > .icon {
+        transform: translateY(0px);
+      }
 
-        .article-tags-tag {
-          margin-right: 6px;
+      &:hover .content-header span {
+        transform: translateY(0px);
+      }
+      .content-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px;
+        .title-info {
+          h1,
+          p {
+            margin: 20px 0;
+          }
+        }
+        span {
+          margin: 20px 0;
+          text-transform: uppercase;
+          transition: 0.4s;
+          transform: translateY(-40px);
+        }
+      }
+      .content-footer {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 10px 10px 20px;
+        .icons {
+          color: #333;
+          .icon {
+            margin: 5px 12px;
+            transform: translateY(80px);
+            &:nth-child(1) {
+              transition: transform 0.4s 0.05s, color 0.4s;
+            }
+            &:nth-child(2) {
+              transition: transform 0.4s 0.1s, color 0.4s;
+            }
+            &:nth-child(3) {
+              transition: transform 0.4s 0.15s, color 0.4s;
+            }
+            &:hover {
+              color: #6469c2;
+            }
+          }
         }
       }
     }
-    .article-img {
-      display: block;
-      max-width: 100%;
-      max-height: 300px;
-      border-radius: 4px;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        transition: all 0.5s ease-out;
-      }
-    }
-    p {
-      color: $color-grey;
-    }
-  }
-  .article-info {
-    display: flex;
-    justify-content: space-between;
-    color: $color-grey;
   }
 }
 </style>

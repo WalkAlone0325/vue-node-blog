@@ -5,6 +5,9 @@ import 'normalize.css/normalize.css'
 import './assets/scss/style.scss'
 import http from './api'
 import * as filters from './utils/filters'
+// 注册全局Loading组件
+import Loading from './components/loading'
+Vue.use(Loading)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = http

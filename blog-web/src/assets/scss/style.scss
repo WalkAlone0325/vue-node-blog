@@ -63,6 +63,12 @@ a {
 ul {
   list-style: none;
 }
+// 文本超出显示...
+.text-over {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 // vue-router过渡动画
 .v-enter {

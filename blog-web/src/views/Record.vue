@@ -1,11 +1,18 @@
 <template>
   <div class="record-page">
+    <h2>收藏的大神文章</h2>
     <ul class="record-list">
-      <h2>收藏的大神文章</h2>
-      <li class="record-item" v-for="(item, index) in recordList" :key="item._id">
+      <li
+        :title="item.title"
+        class="record-item text-over"
+        v-for="(item, index) in recordList"
+        :key="item._id"
+      >
         <span class="item-index">{{index + 1}}</span>
-        <span class="item-date">【{{item.updated | timeFormat}}】</span>
-        <a :href="item.url" target="_blank" class="item-title pointer">{{item.title}}</a>
+        <a :href="item.url" target="_blank" class="item-title pointer">
+          <span class="item-date">【{{item.updated | timeFormat("yyyy-mm-dd")}}】</span>
+          {{item.title}}
+        </a>
       </li>
     </ul>
     <Paginator
@@ -28,7 +35,7 @@ export default {
       recordList: [],
       total: 0, // 文章总数
       page: 1, // 当前页数
-      size: 10, // 每页的条数
+      size: 20, // 每页的条数
       hasMore: false
     };
   },
@@ -36,7 +43,7 @@ export default {
     // 跳转页面
     jump(num) {
       this.page = Number(num);
-      this.get_article();
+      this.getRecord();
     },
     // 获取收录列表
     async getRecord() {
@@ -69,20 +76,25 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  h2 {
+    margin: 20px 0 0;
+    color: $tx-record;
+    text-align: center;
+  }
   .record-list {
     flex: 1;
-    width: 70%;
-    margin: 0 auto;
+    width: 80%;
+    height: 500px;
+    margin: 10px auto;
     list-style: none;
     background: $color-f1;
-
-    h2 {
-      margin: 15px 0;
-      color: $tx-record;
-      text-align: center;
-    }
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     .record-item {
-      padding: 15px;
+      width: 50%;
+      padding: 10px 15px;
       color: $tx-record;
       .item-index {
         display: inline-block;
@@ -96,6 +108,8 @@ export default {
       }
       .item-title {
         text-decoration: none;
+        color: #515a6e;
+        font-weight: 600;
         &:hover {
           color: $tx-record-hover;
         }

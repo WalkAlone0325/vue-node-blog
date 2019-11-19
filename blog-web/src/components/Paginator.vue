@@ -1,17 +1,16 @@
 <template>
   <div class="paginator">
     <ul>
-      <li class="click-btn pointer" @click="jump(cur_page-1)">Prev</li>
+      <li class="click-btn pointer" @click="jump(cur_page - 1)">Prev</li>
       <li
         class="page-number pointer"
         v-for="i in pages"
         :key="i"
-        :class="i==cur_page?'active':''"
+        :class="i == cur_page ? 'active' : ''"
         @click="jump(i)"
-      >{{i}}</li>
-      <li class="page-number pointer" @click="jump(cur_page+1)">2</li>
-      <li class="click-btn pointer" @click="jump(cur_page+1)">Next</li>
-      <li>共{{total_page}}页 {{total}}篇文章</li>
+      >{{ i }}</li>
+      <li class="click-btn pointer" @click="jump(cur_page + 1)">Next</li>
+      <li>共{{ total_page }}页 {{ total }}篇文章</li>
     </ul>
   </div>
 </template>
@@ -78,8 +77,7 @@ export default {
 };
 </script>
 
-
-<style lang="scss">
+<style lang="scss" scoped>
 .paginator {
   width: 70%;
   margin: 0 auto;
@@ -118,4 +116,3 @@ export default {
   }
 }
 </style>
-

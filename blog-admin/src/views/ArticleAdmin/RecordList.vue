@@ -118,11 +118,11 @@ export default {
   methods: {
     handleSizeChange(val) {
       this.size = val;
-      this.getArticleList();
+      this.getRecord();
     },
     handleCurrentChange(val) {
       this.page = val;
-      this.getArticleList();
+      this.getRecord();
     },
 
     // 创建收录

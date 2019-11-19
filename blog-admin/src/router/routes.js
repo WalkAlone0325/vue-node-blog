@@ -33,20 +33,20 @@ export default [
         path: "/page",
         name: "page",
         component: () => import("../views/PageAdmin/Index.vue"),
-        redirect: '/page/menulist',
+        redirect: '/page/homepage',
         meta: { title: '页面管理', icon: 'el-icon-s-operation' },
         children: [
-          {
-            path: "/page/menulist",
-            name: "menulist",
-            component: () => import("../views/PageAdmin/MenuList.vue"),
-            meta: { title: '菜单导航', icon: 'el-icon-s-order' }
-          },
           {
             path: "/page/homepage",
             name: "homepage",
             component: () => import("../views/PageAdmin/HomePage.vue"),
             meta: { title: '首页管理', icon: 'el-icon-s-home' }
+          },
+          {
+            path: "/page/project",
+            name: "projectpage",
+            component: () => import("../views/PageAdmin/ProjectPage.vue"),
+            meta: { title: '项目管理', icon: 'el-icon-s-order' }
           },
           {
             path: "/page/aboutpage",

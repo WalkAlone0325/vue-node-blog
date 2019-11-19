@@ -1,45 +1,54 @@
 <template>
   <div class="project-item-container">
-    <div class="project-item pointer" v-for="n in 3" :key="n">
+    <a
+      :href="item.project_url"
+      target="_block"
+      :title="`项目地址: ${item.project_url}` || ''"
+      class="project-item pointer"
+      v-for="item in projectList"
+      :key="item._id"
+    >
       <div class="img-box">
-        <img src="../assets/images/avatar.jpg" alt />
+        <img :src="item.img_url" alt="图片不见了" />
       </div>
       <div class="content">
-        <h3>菜鸟外卖</h3>
-        <p>saisja osjlasmlaaisja osjlasmlaaisja osjlasmlaaisja osjlasmlaaisja osjlasmla</p>
+        <h3>{{item.project_name}}</h3>
+        <p>{{item.desc}}</p>
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: { projectList: Array }
+};
 </script>
 
 <style lang="scss" scoped>
 .project-item-container {
+  color: #000;
   width: 70%;
-  margin: 30px auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   .project-item {
     position: relative;
     width: 300px;
     height: 400px;
-    background: #000;
+    margin: 10px;
+    background: #666;
     box-shadow: 0 30px 30px rgba(0, 0, 0, 0.5);
-
     &:hover .img-box img {
       opacity: 0;
     }
-
     .img-box {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-
       img {
         position: absolute;
         top: 0;
@@ -57,10 +66,11 @@ export default {};
       left: 10%;
       width: 80%;
       height: 50px;
-      background: #fff;
+      background: #f1f1f1;
       transition: 0.3s;
       overflow: hidden;
       padding: 15px;
+      color: #515a6e;
       h3 {
         margin: 0;
         padding: 0;

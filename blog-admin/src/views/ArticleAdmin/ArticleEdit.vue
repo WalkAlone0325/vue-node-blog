@@ -24,13 +24,14 @@
       </el-form-item>
 
       <el-form-item label="封面" prop="image" required>
+        <el-input v-model="articleForm.image"></el-input>或
         <el-upload
           class="avatar-uploader"
           :action="$http.defaults.baseURL + '/upload'"
           :show-file-list="false"
           :on-success="afterUpload"
         >
-          <img v-if="articleForm.image" :src="articleForm.image" class="avatar" />
+          <img v-if="articleForm.image" :src="articleForm.image" alt="图片找不见！" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
@@ -79,7 +80,15 @@ export default {
       rules: {
         title: [{ required: true, message: "请输入文章标题", trigger: "blur" }],
         image: [
-          { required: true, message: "请选择一张封面图片", trigger: "blur" }
+          {
+            required: true,
+            message: "请选择一张封面地址或图片",
+            trigger: "blur"
+          },
+          {
+            pattern: /https?:\/{2}[^\s]*/,
+            message: "地址请以http或https开头字母和数字"
+          }
         ],
         resource: [
           { required: true, message: "请选择状态", trigger: "change" }

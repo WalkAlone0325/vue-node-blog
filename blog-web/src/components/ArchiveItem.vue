@@ -1,12 +1,15 @@
 <template>
   <div class="arch-item">
     <div class="arch-item-title">
-      <!-- <span>☆</span> -->
-      <span>{{title | format}}</span>
+      <span> <i class="fa fa-bookmark"></i> {{ title | format }}</span>
     </div>
     <ul>
-      <router-link :to="`/article/${item._id}`" v-for="(item, index) in list" :key="index">
-        <li>{{item.created.substring(0,10) + " => " + item.title}}</li>
+      <router-link
+        :to="`/article/${item._id}`"
+        v-for="(item, index) in list"
+        :key="index"
+      >
+        <li>{{ item.created.substring(0, 10) + " => " + item.title }}</li>
       </router-link>
     </ul>
   </div>
@@ -24,7 +27,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss">
 .arch-item {
   width: 80%;
@@ -35,6 +37,9 @@ export default {
     font-size: 24px;
     font-weight: 700;
     margin: 20px 10px;
+    span {
+      color: #515a6e;
+    }
   }
 
   ul {
@@ -54,4 +59,3 @@ export default {
   }
 }
 </style>
-

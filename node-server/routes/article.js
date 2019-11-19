@@ -51,7 +51,6 @@ router.get('/article', async ctx => {
   const reqParam = ctx.query
   const page = Number(reqParam.page) // 当前第几页
   const size = Number(reqParam.size) // 每页显示的记录条数
-  console.log(ctx.query.page, ctx.query.size)
   // 显示符合前端分页请求的列表查询
   const res = await Article.find().populate('tags').skip((page - 1) * size).limit(size)
   //是否还有更多
