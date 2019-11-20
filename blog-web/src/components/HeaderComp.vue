@@ -1,7 +1,7 @@
 <template>
   <div class="header-page">
     <header>
-      <h1>独行的博客</h1>
+      <h1>独行</h1>
       <nav>
         <ul class="header-nav">
           <router-link
@@ -10,14 +10,11 @@
             class="nav-item"
             v-for="(item, index) in menuList"
             :key="index"
-            >{{ item.name }}</router-link
-          >
+          >{{ item.name }}</router-link>
         </ul>
       </nav>
       <div class="header-la">
-        <router-link to="/login" tag="button" class="login" v-if="login"
-          >登录/注册</router-link
-        >
+        <router-link to="/login" tag="button" class="login" v-if="login">登录/注册</router-link>
         <div class="avatar" v-else></div>
       </div>
     </header>

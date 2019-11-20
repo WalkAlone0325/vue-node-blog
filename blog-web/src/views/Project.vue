@@ -17,7 +17,6 @@ export default {
     async getProject() {
       const res = await this.$http("/project");
       this.projectList = res.data.data;
-      console.log(this.projectList);
     }
   },
   created() {
@@ -29,5 +28,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

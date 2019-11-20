@@ -8,6 +8,7 @@
       </transition>
     </main>
     <footer-comp></footer-comp>
+    <SideBar />
     <EyesItem />
   </div>
 </template>
@@ -16,13 +17,15 @@
 import EyesItem from "@/components/EyesItem";
 import HeaderComp from "@/components/HeaderComp.vue";
 import FooterComp from "@/components/FooterComp.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
   name: "app",
   components: {
     HeaderComp,
     FooterComp,
-    EyesItem
+    EyesItem,
+    SideBar
   }
 };
 </script>

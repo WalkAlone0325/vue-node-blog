@@ -7,7 +7,7 @@
       :to="`/article/${item._id}`"
       tag="div"
     >
-      <img :src="item.image" alt="图片不见了" />
+      <img v-lazy="item.image" alt="图片不见了" />
       <div class="image-content">
         <div class="content-header">
           <div class="title-info">
@@ -15,7 +15,7 @@
             <p>{{ item.intro }}</p>
           </div>
           <span>
-            <i class="fa fa-tags"></i>
+            <i class="iconfont icon-biaoqian"></i>
             <span v-for="tag in item.tags" :key="tag._id">
               <span style="margin-left: 6px">{{ tag.tag }}</span>
             </span>
@@ -23,13 +23,20 @@
         </div>
         <div class="content-footer">
           <span>
+            <i class="iconfont icon-shijian"></i>
             发布于：
             {{ item.updated | timeFormat }}
           </span>
           <div class="icons">
-            <i class="icon fas fa-heart">123</i>
-            <i class="icon fas fa-comment">123</i>
-            <i class="icon fas fa-share">123</i>
+            <div class="icon">
+              <i class="iconfont icon-yanjing"></i><span>12</span>
+            </div>
+            <div class="icon">
+              <i class="iconfont icon-dianzan"></i><span>6</span>
+            </div>
+            <div class="icon">
+              <i class="iconfont icon-pinglun"></i><span>0</span>
+            </div>
           </div>
         </div>
       </div>
@@ -112,10 +119,14 @@ export default {
         justify-content: space-between;
         margin: 0 10px 10px 20px;
         .icons {
-          color: #333;
+          color: #000;
           .icon {
-            margin: 5px 12px;
+            display: inline-block;
+            margin: 5px 10px 5px 20px;
             transform: translateY(80px);
+            .iconfont {
+              font-size: 16px;
+            }
             &:nth-child(1) {
               transition: transform 0.4s 0.05s, color 0.4s;
             }
@@ -126,7 +137,7 @@ export default {
               transition: transform 0.4s 0.15s, color 0.4s;
             }
             &:hover {
-              color: #6469c2;
+              color: #3d8dd7;
             }
           }
         }

@@ -99,7 +99,9 @@ router.get('/tag', async ctx => {
 
 // 标签获取文章列表
 router.get('/article', async ctx => {
-  let { tag = '', page = '', size = '' } = ctx.query
+  let { tag = '', page, size } = ctx.query
+  page = Number(page) // 当前第几页
+  size = Number(size) // 每页显示的记录条数
   try {
     let querys = {}
     querys.resource = { $in: 1 }
@@ -107,11 +109,12 @@ router.get('/article', async ctx => {
     if (tag != '') {
       querys.tags = { $in: [tag] }
     }
-    const total = await Article.countDocuments()
+    console.log(tag, page, size)
+    const total = await Article.countDocuments({ resource: { $in: 1 } })
     const res = await Article.find(querys).populate({
       path: 'tags',
       select: "_id tag desc"
-    })
+    }).skip((page - 1) * size).limit(size)
     //是否还有更多
     const hasMore = total - (page - 1) * size > size ? true : false
     ctx.body = {
@@ -122,7 +125,6 @@ router.get('/article', async ctx => {
       hasMore
     }
   } catch (error) {
-    console.log(error);
     ctx.body = {
       code: 500,
       msg: '获取文章失败！'

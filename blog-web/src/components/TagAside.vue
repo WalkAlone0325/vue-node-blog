@@ -6,7 +6,7 @@
       <ul>
         <li class="pointer">
           <span class="tag-name" @click="searchTag('')">全部</span>
-          <span class="article-count">【{{tagsList.length}}】篇</span>
+          <span class="article-count">【{{total}}】篇</span>
         </li>
         <li class="pointer" @click="searchTag(item._id)" v-for="item in tagsList" :key="item._id">
           <span class="tag-name">{{ item.tag }}</span>
@@ -20,7 +20,7 @@
 <script>
 export default {
   // props: { tagList: Array, article_count: Array },
-  props: { tagsList: Array },
+  props: { tagsList: Array, total: Number },
   data() {
     return {};
   },

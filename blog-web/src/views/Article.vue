@@ -1,10 +1,10 @@
 <template>
   <div class="article-page">
     <!-- 左侧信息栏 -->
-    <tag-aside @searchTag="searchTag" :tagsList="tagsList"></tag-aside>
+    <tag-aside @searchTag="searchTag" :total="total" :tagsList="tagsList"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box" id="resultScroll" ref="myScrollbar">
-      <!-- <loading v-if="!articleList"></loading> -->
+      <loading v-if="isLoading"></loading>
       <article-item :articleList="articleList"></article-item>
       <!-- <article-item :articleList="articleList"></article-item> -->
     </div>
@@ -22,54 +22,58 @@ export default {
       tagsList: [],
       tag: "",
       isLoading: false,
+      hasMore: false, // 是否还有更多
       page: 1, // 当前页数
-      size: 5
+      size: 5, // 每页的条数
+      total: null
     };
   },
   methods: {
     // 滚动事件监听
     handleScroll() {
-      const $list = this.$refs.list;
-      if (this.isLoading) return true;
-      if ($list.scrollTop + document.body.clientHeight >= $list.scrollHeight) {
-        this.getAtricle();
+      let scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      let clientHeight = document.documentElement.clientHeight;
+      let scrollHeight = document.documentElement.scrollHeight;
+      // 如果滚动到接近底部，自动加载下一页
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.isLoading = true;
+        if (this.hasMore) {
+          // 事件处理
+          this.page += 1;
+          // 数据请求
+          this.getAtricle();
+        }
+        this.isLoading = false;
       }
-      // 判断是否已到底部
-      // if (
-      //   document.documentElement.scrollTop + window.innerHeight >=
-      //   document.body.offsetHeight
-      // ) {
-      //   if (sw == true) {
-      //     sw = false;
-      //     // 是否调用请求方法
-      //     this.getAtricle();
-      //     sw = true;
-      //   }
-      // }
     },
 
     // 过滤文章
     searchTag(val) {
-      console.log(val, this.articleList);
       this.tag = val;
+      this.page = 1;
+      this.articleList = [];
+      this.isLoading = true;
       this.getAtricle();
+      this.isLoading = false;
     },
 
     // 获取文章列表
     async getAtricle() {
-      // var that = this;
+      this.isLoading = true;
       const res = await this.$http.get("/article", {
         params: {
           tag: this.tag || "",
-          page: this.page,
-          size: this.size
+          page: this.page || 1,
+          size: this.size || ""
         }
       });
-
-      this.articleList = res.data.article;
-
-      // this.articleList = res.data.article;
-      console.log(res.data);
+      res.data.article.forEach(val => {
+        this.articleList = [...this.articleList, val];
+      });
+      this.total = res.data.total;
+      this.hasMore = res.data.hasMore;
+      this.isLoading = false;
     },
     async getTag() {
       const res = await this.$http.get("/tag");
@@ -93,12 +97,8 @@ export default {
     this.getTag();
   },
   mounted() {
-    var that = this;
     // 监听滚动事件
-    document
-      .getElementById("resultScroll")
-      .addEventListener("scroll", that.handleScroll, true);
-    // window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
   components: {
     ArticleItem,
