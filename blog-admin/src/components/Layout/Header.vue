@@ -1,26 +1,22 @@
 <template>
   <div class="myheader">
     <section class="logo" :class="{'minWidth':isCollapse}">
-      <a
-        target="_blank"
-        href="https://github.com/liuxingzhijian1320/vue-cli3-admin.git"
-        class="logoLink"
-      >
-        <img src="./images/logo.png" alt="logo" />
+      <a target="_blank" href="https://github.com/" class="logoLink">
+        <img src="./images/logo.jpg" alt="logo" />
         <span v-if="!isCollapse">独行的博客</span>
       </a>
     </section>
     <section class="header-content">
       <section class="collspan dc cursor" @click="collspan">
-        <img src="./images/close.png" alt="logo" v-if="!isCollapse" />
-        <img src="./images/open.png" alt="logo" v-if="isCollapse" />
+        <i class="el-icon-s-unfold" v-if="!isCollapse"></i>
+        <i class="el-icon-s-fold" v-if="isCollapse"></i>
       </section>
       <div class="bread">
         <BreadCrumb></BreadCrumb>
       </div>
       <!-- 全屏 -->
       <section class="fullscreen cursor dc" @click="toggleFull">
-        <img src="./images/fullscreen.png" alt="logo" />
+        <i class="el-icon-full-screen"></i>
       </section>
       <!-- 右侧菜单 -->
       <section class="cursor dc">
@@ -75,7 +71,7 @@ export default {
         Utils.delCookie("DEFAULT_TOKEN");
         this.$router.push("/login");
       } else if (index == 2) {
-        window.open("http://www.zhooson.cn", "_blank");
+        window.open("http://www.baidu.com", "_blank");
       }
     },
     // 全屏操作
@@ -114,6 +110,7 @@ export default {
     }
   }
   .logoLink {
+    text-decoration: none;
     display: inline-block;
     margin-left: 18px;
     height: 100%;
@@ -122,9 +119,10 @@ export default {
     font-size: 15px;
     line-height: 50px;
     img {
+      border-radius: 50%;
       position: relative;
       top: -3px;
-      margin-right: 8px;
+      margin-right: 16px;
       height: 28px;
       vertical-align: middle;
     }
@@ -135,8 +133,9 @@ export default {
     padding: 0 20px;
     align-items: center;
     .collspan {
-      img {
-        display: block;
+      i {
+        font-size: 20px;
+        color: #333;
       }
     }
     .bread {
@@ -147,8 +146,9 @@ export default {
     }
     .fullscreen {
       margin-right: 30px;
-      img {
-        display: block;
+      i {
+        font-size: 20px;
+        color: #333;
       }
     }
   }

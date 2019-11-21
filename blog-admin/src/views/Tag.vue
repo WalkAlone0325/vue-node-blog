@@ -124,7 +124,6 @@ export default {
 
     // 编辑时数据
     setCurrent(tag) {
-      console.log(tag);
       this.update._id = tag._id;
       this.update.tag = tag.tag;
       this.update.desc = tag.desc;
@@ -133,11 +132,10 @@ export default {
 
     // 修改标签列表
     updateTag(update) {
-      console.log(update._id);
       this.$refs.updateForm.validate(async valid => {
         if (valid) {
           await this.$http.put(`/tag/${update._id}`, this.update);
-          console.log(this.update);
+          // console.log(this.update);
           this.$message.success("修改标签成功！");
           this.updateDialog = false;
           this.getTag();
@@ -149,7 +147,7 @@ export default {
 
     // 删除
     removed(row) {
-      console.log(row._id, row.tag);
+      // console.log(row._id, row.tag);
       this.$confirm(`是否删除标签 "${row.tag}"`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -187,7 +185,6 @@ export default {
         return a.numList < b.numList;
       });
       this.tagsList = tagsList;
-      console.log(tagsList);
     }
   },
   created() {

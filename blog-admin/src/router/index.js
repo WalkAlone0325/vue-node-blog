@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
-// import Utils from '../utils/utils'
 
 Vue.use(VueRouter)
 
@@ -12,19 +11,17 @@ VueRouter.prototype.push = function push(location) {
 }
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })
 
 // 全局路由守卫
 router.beforeEach((to, from, next) => {
-  // let getInfo = Utils.getCookie('DEFAULT_TOKEN') || ''
   if (!to.meta.isPublic && !localStorage.token) {
     return next('/login')
-  } else {
-    next()
   }
+  next()
 })
 
 export default router

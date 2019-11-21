@@ -14,8 +14,8 @@
         </ul>
       </nav>
       <div class="header-la">
-        <router-link to="/login" tag="button" class="login" v-if="login">登录/注册</router-link>
-        <div class="avatar" v-else></div>
+        <!-- <router-link to="/login" tag="button" class="login" v-if="login">登录/注册</router-link> -->
+        <!-- <div class="avatar"></div> -->
       </div>
     </header>
   </div>

@@ -1,16 +1,3 @@
-export function capitalizeFirstLetter(word) {
-  const letters = word.split('');
-  const first = letters.shift().toUpperCase();
-  letters.unshift(first);
-  return letters.join('');
-}
-
-export function formatMoney(str) {
-  const num = parseInt(str, 10);
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-
 /**
 * 格式化时间戳
 * @param {时间戳} date

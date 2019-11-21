@@ -29,13 +29,16 @@
           </span>
           <div class="icons">
             <div class="icon">
-              <i class="iconfont icon-yanjing"></i><span>12</span>
+              <i class="iconfont icon-yanjing"></i>
+              <span>12</span>
             </div>
             <div class="icon">
-              <i class="iconfont icon-dianzan"></i><span>6</span>
+              <i class="iconfont icon-dianzan"></i>
+              <span>6</span>
             </div>
             <div class="icon">
-              <i class="iconfont icon-pinglun"></i><span>0</span>
+              <i class="iconfont icon-pinglun"></i>
+              <span>0</span>
             </div>
           </div>
         </div>

@@ -26,15 +26,11 @@ export default {
         url: "/upload",
         method: "POST",
         data: formData
-      })
-        .then(result => {
-          let url = result.data.filename;
-          Editor.insertEmbed(cursorLocation, "image", url);
-          resetUploader();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      }).then(result => {
+        let url = result.data.filename;
+        Editor.insertEmbed(cursorLocation, "image", url);
+        resetUploader();
+      });
     },
 
     saveBody() {

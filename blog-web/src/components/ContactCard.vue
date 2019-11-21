@@ -1,15 +1,19 @@
 <template>
   <div class="contact-card">
     <div class="contact-header">
-      <p>2112313123131313</p>
+      <h1>独行的博客</h1>
+      <h3>
+        <i class="iconfont icon-youxiang" style="font-size: 24px;"></i> jsw0325@163.com
+      </h3>
+      <p>小小前端开发，努力学习，不敢放松，追赶大佬的步伐。</p>
+      <i class="iconfont icon-jieshao" style="font-size: 18px; margin-right: -15px;"></i>
+      <span>介绍下博客：</span>
+      <p>前端展示：使用了最新版的 Vuecli4.x 搭建，HTML5、CSS3 的很多新特性，基本用 Flex 布局搭建，没有使用多余的插件，基本上都是自己实现。</p>
+      <p>后台管理：使用了最新版的 Vuecli4.x 搭建，Element-UI，vue-router，vuex，Markdown编辑器，全屏，富文本编辑器等。</p>
+      <p>服务端接口：使用了Koa2，MongoDB数据库。</p>
     </div>
-    <!-- @click="handleSelect" -->
     <div class="contact-container">
-      <div
-        class="box first pointer"
-        @click="handleSelect"
-        :class="{ selected: isSelected }"
-      >
+      <div class="box first pointer" @click="handleSelect1" :class="{ selected: isSelected1 }">
         <span class="icon-cont">
           <i class="iconfont icon-git"></i>
         </span>
@@ -18,21 +22,11 @@
         <ul class="hidden">
           <li>求Star</li>
           <li>多多关照</li>
-          <a
-            @click.stop
-            href="https://github.com/WalkAlone0325"
-            target="_block"
-          >
-            进入我的github主页
-          </a>
+          <a @click.stop href="https://github.com/WalkAlone0325" target="_block">GITHUB主页</a>
         </ul>
       </div>
 
-      <div
-        class="box second pointer"
-        @click="handleSelect(2)"
-        :class="{ selected: isSelected }"
-      >
+      <div class="box second pointer" @click="handleSelect2" :class="{ selected: isSelected2 }">
         <span class="icon-cont">
           <i class="iconfont icon-juejin"></i>
         </span>
@@ -41,21 +35,11 @@
         <ul class="hidden">
           <li>掘金收藏了文章</li>
           <li>看大神秀操作</li>
-          <a
-            @click.stop
-            href="https://juejin.im/user/5b38cdb1e51d4558c4723f86"
-            target="_block"
-          >
-            进入我的掘金主页
-          </a>
+          <a @click.stop href="https://juejin.im/user/5b38cdb1e51d4558c4723f86" target="_block">掘金主页</a>
         </ul>
       </div>
 
-      <div
-        class="box third pointer"
-        @click="handleSelect(4)"
-        :class="{ selected: isSelected }"
-      >
+      <div class="box third pointer" @click="handleSelect3" :class="{ selected: isSelected3 }">
         <span class="icon-cont">
           <i class="iconfont icon-weixin1"></i>
         </span>
@@ -71,11 +55,7 @@
         </ul>
       </div>
 
-      <div
-        class="box fourth  pointer"
-        @click="handleSelect(3)"
-        :class="{ selected: isSelected }"
-      >
+      <div class="box fourth pointer" @click="handleSelect4" :class="{ selected: isSelected4 }">
         <span class="icon-cont">
           <i class="iconfont icon-QQ"></i>
         </span>
@@ -87,9 +67,7 @@
             @click.stop
             href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2291763727"
             target="class"
-          >
-            加我的QQ
-          </a>
+          >加我的QQ</a>
         </ul>
       </div>
     </div>
@@ -100,13 +78,25 @@
 export default {
   data() {
     return {
-      isSelected: false, // 切换类名
+      isSelected1: false,
+      isSelected2: false,
+      isSelected3: false,
+      isSelected4: false, // 切换类名
       val: null
     };
   },
   methods: {
-    handleSelect() {
-      this.isSelected = !this.isSelected;
+    handleSelect1() {
+      this.isSelected1 = !this.isSelected1;
+    },
+    handleSelect2() {
+      this.isSelected2 = !this.isSelected2;
+    },
+    handleSelect3() {
+      this.isSelected3 = !this.isSelected3;
+    },
+    handleSelect4() {
+      this.isSelected4 = !this.isSelected4;
     }
   }
 };
@@ -119,23 +109,35 @@ export default {
   justify-content: space-between;
   flex-direction: column;
   background-image: linear-gradient(120deg, #8e44ad, #3495db, #8e44ad);
+  .contact-header {
+    padding: 0 50px;
+    color: #f1f1f1;
+    h1 {
+      display: inline-block;
+      margin: 20px 20px 0 0;
+    }
+    h3 {
+      display: inline-block;
+    }
+    p,
+    span {
+      margin-left: 20px;
+    }
+    p {
+      margin: 8px;
+      text-indent: 30px;
+    }
+  }
   .contact-container {
     flex: 1;
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
-    .contact-header {
-      p {
-        color: #fff;
-        background: #000;
-      }
-    }
     .box {
       height: 260px;
       padding: 15px;
       display: flex;
       background-position: center;
-      border: 1px solid #000;
       position: relative;
       overflow: hidden;
       &:hover .icon-cont {
@@ -210,7 +212,6 @@ export default {
         z-index: 4;
       }
       ul {
-        font-family: "Open Sans", Arial, sans-serif;
         color: #fff;
         font-size: 13px;
         line-height: 28px;
@@ -221,9 +222,18 @@ export default {
         margin-left: -15px;
         transition: 0.5s;
         a {
+          display: inline-block;
+          // text-align: center;
+          margin: 20px auto;
+          width: 100%;
+          // height: 50px;
+          font-size: 20px;
+          // border: 1px solid #000;
           color: #fff;
           &:hover {
-            color: #3495db;
+            border-radius: 5px;
+            color: #515a6e;
+            background: #f1f1f1;
           }
         }
       }

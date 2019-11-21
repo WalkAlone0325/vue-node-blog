@@ -1,12 +1,7 @@
 <template>
   <div class="adminlist-page">
     <h2>管理员</h2>
-    <el-button
-      style="margin-left: 20px;"
-      type="primary"
-      @click="addDialog = true"
-      >添加管理员</el-button
-    >
+    <el-button style="margin-left: 20px;" type="primary" @click="addDialog = true">添加管理员</el-button>
 
     <!-- 添加管理员 -->
     <el-dialog
@@ -16,12 +11,7 @@
       width="30%"
       :before-close="done => done()"
     >
-      <el-form
-        :model="create"
-        :rules="rules"
-        ref="createForm"
-        label-width="80px"
-      >
+      <el-form :model="create" :rules="rules" ref="createForm" label-width="80px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="create.username"></el-input>
         </el-form-item>
@@ -31,12 +21,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialog = false">取 消</el-button>
-        <el-button
-          type="primary"
-          :loading="createLoading"
-          @click="createAdmin('create')"
-          >添 加</el-button
-        >
+        <el-button type="primary" :loading="createLoading" @click="createAdmin('create')">添 加</el-button>
         <!-- @keyup.enter="createAdmin('create')" -->
       </span>
     </el-dialog>
@@ -49,12 +34,7 @@
       width="30%"
       :before-close="done => done()"
     >
-      <el-form
-        :model="update"
-        :rules="rules"
-        ref="updateForm"
-        label-width="80px"
-      >
+      <el-form :model="update" :rules="rules" ref="updateForm" label-width="80px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="update.username"></el-input>
         </el-form-item>
@@ -69,11 +49,7 @@
     </el-dialog>
 
     <!-- 表格数据列表 -->
-    <el-table
-      :data="adminList"
-      border
-      style="width: 80%; margin: 0 auto; margin-top: 20px"
-    >
+    <el-table :data="adminList" border style="width: 80%; margin: 0 auto; margin-top: 20px">
       <el-table-column type="index" width="100"></el-table-column>
       <el-table-column prop="username" label="管理员名称"></el-table-column>
       <el-table-column prop="created" label="创建时间">
@@ -88,12 +64,8 @@
       </el-table-column>
       <el-table-column label="操作" width="150" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="setCurrent(scope.row)"
-            >编辑</el-button
-          >
-          <el-button type="danger" size="small" @click="removed(scope.row)"
-            >删除</el-button
-          >
+          <el-button type="primary" size="small" @click="setCurrent(scope.row)">编辑</el-button>
+          <el-button type="danger" size="small" @click="removed(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -159,7 +131,7 @@ export default {
 
     // 编辑时数据
     setCurrent(admin) {
-      console.log(admin);
+      // console.log(admin);
       this.update._id = admin._id;
       this.update.username = admin.username;
       this.update.password = admin.password;
@@ -168,7 +140,7 @@ export default {
 
     // 修改管理员列表
     updateAdmin(update) {
-      console.log(update._id);
+      // console.log(update._id);
       this.$refs.updateForm.validate(async valid => {
         if (valid) {
           this.updateLoading = true;

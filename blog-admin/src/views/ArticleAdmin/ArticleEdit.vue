@@ -141,7 +141,6 @@ export default {
               });
             });
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
@@ -160,7 +159,6 @@ export default {
     async getTagList() {
       const res = await this.$http.get("/tag");
       this.taglists = res.data.data.tags_list;
-      console.log(res.data.data.tags_list);
     },
 
     // 获取文章详情列表

@@ -16,18 +16,12 @@
           <p>{{ item.name }}</p>
           <p>{{ item.progress_bar }}%</p>
           <div class="skill">
-            <div
-              class="skill-level"
-              :style="{ width: `${item.progress_bar}%` }"
-            ></div>
+            <div class="skill-level" :style="{ width: `${item.progress_bar}%` }"></div>
           </div>
         </div>
       </div>
 
-      <div class="home-right">
-        <!-- <div>123</div> -->
-        <ContactCard />
-      </div>
+      <ContactCard />
     </div>
   </div>
 </template>
@@ -62,16 +56,8 @@ export default {
   .home-info {
     display: flex;
     justify-content: center;
-    height: 500px;
+    height: 450px;
     background: 50% 50% url("../assets/images/bg1.jpg");
-    // .title {
-    //   width: 16px;
-    //   margin: auto;
-    //   line-height: 40 px;
-    //   font-size: 30px;
-    //   color: $color-white;
-    //   word-wrap: break-word; // 英文换行
-    // }
     .info {
       display: flex;
       flex-direction: column;
@@ -93,7 +79,6 @@ export default {
   .home-section {
     width: 100%;
     display: flex;
-    // background: $color-white;
     .home-skill {
       width: 40%;
       padding: 30px;
@@ -131,14 +116,6 @@ export default {
           }
         }
       }
-    }
-    .home-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      // align-items: center;
-      // background-image: $bg-img1;
     }
   }
 }

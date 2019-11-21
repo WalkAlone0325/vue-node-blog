@@ -8,15 +8,6 @@ const logger = require('koa-logger')
 const cors = require('koa2-cors')
 require('./db/config')(app)
 
-
-const article = require('./routes/article')
-const user = require('./routes/user')
-const tag = require('./routes/tag')
-const page = require('./routes/page')
-const project = require('./routes/project')
-const record = require('./routes/record')
-const skill = require('./routes/skill')
-
 const web = require('./routes/web/index')
 
 // error handler
@@ -44,13 +35,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(user.routes(), user.allowedMethods())
-app.use(article.routes(), article.allowedMethods())
-app.use(tag.routes(), tag.allowedMethods())
-app.use(page.routes(), page.allowedMethods())
-app.use(project.routes(), project.allowedMethods())
-app.use(record.routes(), record.allowedMethods())
-app.use(skill.routes(), skill.allowedMethods())
+require('./routes/admin/index')(app)
 app.use(web.routes(), web.allowedMethods())
 
 // error-handling

@@ -1,5 +1,8 @@
 <template>
-  <div class="dashbord">Dashbord</div>
+  <div class="dashbord">
+    <h1>欢迎大哥</h1>
+    <span>首页这里还没计划好写什么</span>
+  </div>
 </template>
 
 <script>

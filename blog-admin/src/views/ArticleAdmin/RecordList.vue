@@ -149,7 +149,7 @@ export default {
 
     // 编辑时数据
     setCurrent(record) {
-      console.log(record);
+      // console.log(record);
       this.update._id = record._id;
       this.update.title = record.title;
       this.update.url = record.url;
@@ -158,7 +158,7 @@ export default {
 
     // 修改收录列表
     updateRecord(update) {
-      console.log(update._id);
+      // console.log(update._id);
       this.$refs.updateForm.validate(async valid => {
         if (valid) {
           this.updateLoading = true;

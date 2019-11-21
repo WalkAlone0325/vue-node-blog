@@ -4,9 +4,8 @@
     <tag-aside @searchTag="searchTag" :total="total" :tagsList="tagsList"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box" id="resultScroll" ref="myScrollbar">
-      <loading v-if="isLoading"></loading>
       <article-item :articleList="articleList"></article-item>
-      <!-- <article-item :articleList="articleList"></article-item> -->
+      <loading v-if="!articleList.length"></loading>
     </div>
   </div>
 </template>
@@ -21,11 +20,10 @@ export default {
       articleList: [], // 接口数据
       tagsList: [],
       tag: "",
-      isLoading: false,
       hasMore: false, // 是否还有更多
       page: 1, // 当前页数
       size: 5, // 每页的条数
-      total: null
+      total: 0
     };
   },
   methods: {
@@ -37,14 +35,12 @@ export default {
       let scrollHeight = document.documentElement.scrollHeight;
       // 如果滚动到接近底部，自动加载下一页
       if (scrollTop + clientHeight >= scrollHeight) {
-        this.isLoading = true;
         if (this.hasMore) {
           // 事件处理
           this.page += 1;
           // 数据请求
           this.getAtricle();
         }
-        this.isLoading = false;
       }
     },
 
@@ -53,14 +49,11 @@ export default {
       this.tag = val;
       this.page = 1;
       this.articleList = [];
-      this.isLoading = true;
       this.getAtricle();
-      this.isLoading = false;
     },
 
     // 获取文章列表
     async getAtricle() {
-      this.isLoading = true;
       const res = await this.$http.get("/article", {
         params: {
           tag: this.tag || "",
@@ -73,7 +66,6 @@ export default {
       });
       this.total = res.data.total;
       this.hasMore = res.data.hasMore;
-      this.isLoading = false;
     },
     async getTag() {
       const res = await this.$http.get("/tag");

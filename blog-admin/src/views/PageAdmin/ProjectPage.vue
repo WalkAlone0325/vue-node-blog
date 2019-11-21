@@ -1,12 +1,7 @@
 <template>
   <div class="projectlist-page">
     <h2>项目管理</h2>
-    <el-button
-      style="margin-left: 20px;"
-      type="primary"
-      @click="addDialog = true"
-      >添加项目</el-button
-    >
+    <el-button style="margin-left: 20px;" type="primary" @click="addDialog = true">添加项目</el-button>
 
     <!-- 添加项目 -->
     <el-dialog
@@ -16,36 +11,18 @@
       width="30%"
       :before-close="done => done()"
     >
-      <el-form
-        :model="create"
-        :rules="rules"
-        ref="createForm"
-        label-width="80px"
-      >
+      <el-form :model="create" :rules="rules" ref="createForm" label-width="80px">
         <el-form-item label="项目名称" prop="project_name">
-          <el-input
-            v-model="create.project_name"
-            placeholder="请输入项目名称"
-          ></el-input>
+          <el-input v-model="create.project_name" placeholder="请输入项目名称"></el-input>
         </el-form-item>
         <el-form-item label="项目描述" prop="desc">
-          <el-input
-            v-model="create.desc"
-            placeholder="请输入项目描述"
-          ></el-input>
+          <el-input v-model="create.desc" placeholder="请输入项目描述"></el-input>
         </el-form-item>
         <el-form-item label="项目地址" prop="project_url">
-          <el-input
-            v-model="create.project_url"
-            placeholder="请输入项目地址"
-          ></el-input>
+          <el-input v-model="create.project_url" placeholder="请输入项目地址"></el-input>
         </el-form-item>
         <el-form-item label="项目封面" prop="img_url">
-          <el-input
-            v-model="create.img_url"
-            placeholder="请输入项目封面地址"
-          ></el-input
-          >或
+          <el-input v-model="create.img_url" placeholder="请输入项目封面地址"></el-input>或
           <el-upload
             class="avatar-uploader"
             :action="$http.defaults.baseURL + '/upload'"
@@ -59,12 +36,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialog = false">取 消</el-button>
-        <el-button
-          type="primary"
-          :loading="createLoading"
-          @click="createProject('create')"
-          >添 加</el-button
-        >
+        <el-button type="primary" :loading="createLoading" @click="createProject('create')">添 加</el-button>
         <!-- @keyup.enter="createProject('create')" -->
       </span>
     </el-dialog>
@@ -77,36 +49,18 @@
       width="30%"
       :before-close="done => done()"
     >
-      <el-form
-        :model="update"
-        :rules="rules"
-        ref="updateForm"
-        label-width="80px"
-      >
+      <el-form :model="update" :rules="rules" ref="updateForm" label-width="80px">
         <el-form-item label="项目名称" prop="project_name">
-          <el-input
-            v-model="update.project_name"
-            placeholder="请输入项目名称"
-          ></el-input>
+          <el-input v-model="update.project_name" placeholder="请输入项目名称"></el-input>
         </el-form-item>
         <el-form-item label="项目描述" prop="desc">
-          <el-input
-            v-model="update.desc"
-            placeholder="请输入项目描述"
-          ></el-input>
+          <el-input v-model="update.desc" placeholder="请输入项目描述"></el-input>
         </el-form-item>
         <el-form-item label="项目地址" prop="project_url">
-          <el-input
-            v-model="update.project_url"
-            placeholder="请输入项目地址"
-          ></el-input>
+          <el-input v-model="update.project_url" placeholder="请输入项目地址"></el-input>
         </el-form-item>
         <el-form-item label="项目封面" prop="img_url">
-          <el-input
-            v-model="update.img_url"
-            placeholder="请输入项目封面地址"
-          ></el-input
-          >或
+          <el-input v-model="update.img_url" placeholder="请输入项目封面地址"></el-input>或
           <el-upload
             class="avatar-uploader"
             :action="$http.defaults.baseURL + '/upload'"
@@ -120,28 +74,19 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="updateDialog = false">取 消</el-button>
-        <el-button type="primary" @click="updateProject(update)"
-          >修 改</el-button
-        >
+        <el-button type="primary" @click="updateProject(update)">修 改</el-button>
       </span>
     </el-dialog>
 
     <!-- 表格数据列表 -->
-    <el-table
-      :data="projectList"
-      border
-      style="width: 80%; margin: 0 auto; margin-top: 20px"
-    >
+    <el-table :data="projectList" border style="width: 80%; margin: 0 auto; margin-top: 20px">
       <el-table-column type="index" width="100"></el-table-column>
       <el-table-column prop="project_name" label="项目名称"></el-table-column>
       <el-table-column prop="desc" label="描述"></el-table-column>
       <el-table-column prop="project_url" label="地址"></el-table-column>
       <el-table-column prop="img_url" label="封面">
         <template slot-scope="{ row }">
-          <img
-            :src="row.img_url"
-            style="margin: 0; width: 100px; height: 130px;"
-          />
+          <img :src="row.img_url" style="margin: 0; width: 100px; height: 130px;" />
         </template>
       </el-table-column>
       <el-table-column prop="updated" label="更新时间">
@@ -151,12 +96,8 @@
       </el-table-column>
       <el-table-column label="操作" width="150" fixed="right">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="setCurrent(scope.row)"
-            >编辑</el-button
-          >
-          <el-button type="danger" size="small" @click="removed(scope.row)"
-            >删除</el-button
-          >
+          <el-button type="primary" size="small" @click="setCurrent(scope.row)">编辑</el-button>
+          <el-button type="danger" size="small" @click="removed(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -223,7 +164,6 @@ export default {
 
     // 编辑时数据
     setCurrent(project) {
-      console.log(project);
       this.update._id = project._id;
       this.update.project_name = project.project_name;
       this.update.project_url = project.project_url;
@@ -235,12 +175,11 @@ export default {
 
     // 修改项目列表
     updateProject(update) {
-      console.log(update._id);
       this.$refs.updateForm.validate(async valid => {
         if (valid) {
           this.updateLoading = true;
           await this.$http.put(`/project/${update._id}`, this.update);
-          console.log(this.update);
+          // console.log(this.update);
           this.$message.success("修改项目成功！");
           this.updateDialog = false;
           this.updateLoading = false;

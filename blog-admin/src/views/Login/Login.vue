@@ -1,46 +1,38 @@
 <template>
-  <div class="login-page">
-    <el-card header="请先登录" class="login-card">
-      <el-form @submit.native.prevent="login">
-        <el-form-item label="用户名">
-          <el-input v-model="formData.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码">
-          <el-input type="password" v-model="formData.password"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" native-type="submit">登录</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+  <div class="login-page bg-img-ani">
+    <div class="login-form">
+      <h2>登录</h2>
+      <div class="form-input">
+        <input type="text" placeholder="用户名" v-model="formData.username" />
+      </div>
+      <div class="form-input">
+        <input type="password" placeholder="密码" v-model="formData.password" />
+      </div>
+      <div class="form-input">
+        <input type="submit" value="登录" @click="login" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import Utils from "../../utils/utils";
-
 export default {
   name: "Login",
   data() {
     return {
       formData: {
-        username: "admin",
-        password: "123"
-      },
-      ableToSubmit: true
+        username: "",
+        password: ""
+      }
     };
   },
   created() {
-    this.$notify({
-      title: "",
-      dangerouslyUseHTMLString: true,
-      message: `我的博客地址：<a href="http://www.zhooson.cn" target="blank">http://www.zhooson.cn</>`,
-      duration: 4000
-    });
-
-    // if (this.$route.query.redirect) {
-    //   this.urlQuery = this.$route.query.redirect;
-    // }
+    // this.$notify({
+    //   title: "",
+    //   dangerouslyUseHTMLString: true,
+    //   message: `我的博客地址：<a href="#" target="blank"></>`,
+    //   duration: 4000
+    // });
   },
   methods: {
     async login() {
@@ -49,7 +41,7 @@ export default {
       if (!password) return this.$message.error("请输入密码");
 
       const res = await this.$http.post("/login", this.formData);
-      console.log(res);
+      // console.log(res);
       if (res) {
         localStorage.token = res.data.token;
         this.$router.replace("/");
@@ -65,10 +57,50 @@ export default {
 
 <style lang="scss" scoped>
 .login-page {
-  background: #666;
-  .login-card {
-    width: 25rem;
-    margin: 10rem auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  .login-form {
+    width: 300px;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    h2 {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .form-input {
+      position: relative;
+      margin: 20px 0;
+      input {
+        outline: none;
+        height: 40px;
+        padding: 0 10px;
+        width: 90%;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        background: transparent;
+        font-size: 18px;
+        &[type="submit"] {
+          margin-left: 10px;
+          background: #e91e63;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          text-transform: uppercase;
+          &:hover {
+            background: #0090ff;
+          }
+        }
+      }
+    }
   }
+  // .login-card {
+  //   width: 25rem;
+  //   margin: 10rem auto;
+  // }
 }
 </style>
