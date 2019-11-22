@@ -15,7 +15,7 @@ Vue.use(Loading)
 Vue.config.productionTip = false
 Vue.prototype.$http = http
 Vue.use(VueLazyLoad, {
-  loading: './assets/images/loading.gif',
+  loading: '/img/loading.gif',
   preLoad: 1.3,
   attempt: 1
 })
