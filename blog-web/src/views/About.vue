@@ -1,14 +1,18 @@
 <template>
   <div class="about-page">
     <div class="about-content" v-html="content"></div>
+    <CommentComp :direct="direct" />
   </div>
 </template>
 
 <script>
+import CommentComp from "../components/CommentComp";
+
 export default {
   data() {
     return {
-      content: ""
+      content: "",
+      direct: true
     };
   },
   methods: {
@@ -19,6 +23,9 @@ export default {
   },
   created() {
     this.getAbout();
+  },
+  components: {
+    CommentComp
   }
 };
 </script>

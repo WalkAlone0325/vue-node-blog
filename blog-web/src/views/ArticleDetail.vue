@@ -7,30 +7,41 @@
       <h1>{{ articleItem.title }}</h1>
       <span class="detail-avatar"> 作者：{{ articleItem.avatar }} </span>
       <span class="detail-avatar">
-        <span v-for="item in articleItem.tags" :key="item._id">
+        <span
+          v-for="item in articleItem.tags"
+          :key="item._id"
+        >
           <span class="detail-tag">标签：{{ item.tag }}</span>
         </span>
       </span>
-      <span class="detail-date"
-        >发布时间：{{ articleItem.updated | timeFormat }}</span
-      >
+      <span class="detail-date">
+        发布时间：{{ articleItem.updated | timeFormat }}
+      </span>
     </div>
     <div class="detail-body">
       <div class="detail-left">
         <div class="markdown-body">
           <!-- v-html="code" -->
-          <div ref="content" v-html="code"></div>
+          <div
+            ref="content"
+            v-html="code"
+          ></div>
         </div>
       </div>
       <div class="detail-aside">
         <h3>目录</h3>
-        <div class="detail-toc" v-html="toc"></div>
+        <div
+          class="detail-toc"
+          v-html="toc"
+        ></div>
       </div>
     </div>
+    <CommentComp :direct="direct" />
   </div>
 </template>
 
 <script>
+import CommentComp from "../components/CommentComp";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
@@ -99,6 +110,7 @@ const tocObj = {
 export default {
   data() {
     return {
+      direct: true,
       articleItem: {},
       code: "",
       toc: ""
@@ -143,7 +155,7 @@ export default {
     }
   },
   components: {
-    // MarkNav
+    CommentComp
   }
 };
 </script>

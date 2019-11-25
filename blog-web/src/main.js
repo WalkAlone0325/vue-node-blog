@@ -8,16 +8,13 @@ import * as filters from './utils/filters'
 import VueLazyLoad from 'vue-lazyload'
 import './assets/font/iconfont.css'
 
+Vue.config.productionTip = false
+Vue.prototype.$http = http
 // 注册全局Loading组件
 import Loading from './components/loading'
 Vue.use(Loading)
-
-Vue.config.productionTip = false
-Vue.prototype.$http = http
 Vue.use(VueLazyLoad, {
-  loading: '/img/loading.gif',
-  preLoad: 1.3,
-  attempt: 1
+  loading: require('./assets/images/loading.jpg')
 })
 
 // 注册全局过滤器

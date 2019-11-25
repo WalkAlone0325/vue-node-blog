@@ -7,40 +7,25 @@
       :to="`/article/${item._id}`"
       tag="div"
     >
-      <img v-lazy="item.image" alt="图片不见了" />
-      <div class="image-content">
+      <div class="article-img">
+        <img v-lazy="item.image" alt="图片不见了" />
+      </div>
+      <div class="article-content">
         <div class="content-header">
-          <div class="title-info">
-            <h1>{{ item.title }}</h1>
-            <p>{{ item.intro }}</p>
-          </div>
-          <span>
+          <h1 class="text-over">{{item.title}}</h1>
+          <p>{{ item.intro }}</p>
+        </div>
+        <div class="content-footer">
+          <span class="content-tag">
             <i class="iconfont icon-biaoqian"></i>
             <span v-for="tag in item.tags" :key="tag._id">
               <span style="margin-left: 6px">{{ tag.tag }}</span>
             </span>
           </span>
-        </div>
-        <div class="content-footer">
-          <span>
+          <span class="content-date">
             <i class="iconfont icon-shijian"></i>
-            发布于：
             {{ item.updated | timeFormat }}
           </span>
-          <div class="icons">
-            <div class="icon">
-              <i class="iconfont icon-yanjing"></i>
-              <span>12</span>
-            </div>
-            <div class="icon">
-              <i class="iconfont icon-dianzan"></i>
-              <span>6</span>
-            </div>
-            <div class="icon">
-              <i class="iconfont icon-pinglun"></i>
-              <span>0</span>
-            </div>
-          </div>
         </div>
       </div>
     </router-link>
@@ -56,93 +41,55 @@ export default {
 <style lang="scss" scoped>
 .article-item-container {
   .article-item {
-    position: relative;
-    width: 90%;
-    height: 252px;
-    margin: 0 30px 15px;
+    display: flex;
+    height: 200px;
+    margin: 0 0 15px 10px;
+    border-radius: 8px;
+    background: linear-gradient(120deg, #8e44ad, #3495db, #8e44ad);
     overflow: hidden;
-    &:hover img {
-      transform: scale(1.1);
-    }
-    img {
-      width: 100%;
-      height: 100%;
+    &:hover {
       transition: 0.4s;
+      box-shadow: 5px 5px 10px #9d7bc7;
+      h1 {
+        color: #303236;
+      }
+      img {
+        transform: scale(1.2);
+      }
+      .article-content > .content-footer > .content-tag {
+        transform: translateY(-4px);
+      }
     }
-    .image-content {
+    .article-img {
+      width: 60%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 200px;
+        transition: 0.6s;
+        border-radius: 8px;
+        opacity: 0.8;
+      }
+    }
+    .article-content {
       width: 100%;
-      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      color: #fff;
-      &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.5);
-        width: 100%;
-        height: 0;
-        clip-path: polygon(60% 100%, 100% 0, 100% 100%);
-        transition: 0.5s;
-      }
-      &:hover::before {
-        height: 100px;
-      }
-      &:hover .content-footer > .icons > .icon {
-        transform: translateY(0px);
-      }
-
-      &:hover .content-header span {
-        transform: translateY(0px);
-      }
+      margin: 0 14px 10px;
+      color: #f1f1f1;
       .content-header {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 20px;
-        .title-info {
-          h1,
-          p {
-            margin: 20px 0;
-          }
-        }
-        span {
-          margin: 20px 0;
-          text-transform: uppercase;
-          transition: 0.4s;
-          transform: translateY(-40px);
+        p {
+          text-indent: 16px;
         }
       }
       .content-footer {
         display: flex;
         justify-content: space-between;
-        margin: 0 10px 10px 20px;
-        .icons {
+        .content-tag {
           color: #000;
-          .icon {
-            display: inline-block;
-            margin: 5px 10px 5px 20px;
-            transform: translateY(80px);
-            .iconfont {
-              font-size: 16px;
-            }
-            &:nth-child(1) {
-              transition: transform 0.4s 0.05s, color 0.4s;
-            }
-            &:nth-child(2) {
-              transition: transform 0.4s 0.1s, color 0.4s;
-            }
-            &:nth-child(3) {
-              transition: transform 0.4s 0.15s, color 0.4s;
-            }
-            &:hover {
-              color: #3d8dd7;
-            }
-          }
+          transition: 0.6s;
+          transform: translateY(40px);
         }
       }
     }

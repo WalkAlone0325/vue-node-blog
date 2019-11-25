@@ -4,8 +4,8 @@
     <tag-aside @searchTag="searchTag" :total="total" :tagsList="tagsList"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box" id="resultScroll" ref="myScrollbar">
-      <article-item :articleList="articleList"></article-item>
       <loading v-if="!articleList.length"></loading>
+      <article-item :articleList="articleList" v-else></article-item>
     </div>
   </div>
 </template>

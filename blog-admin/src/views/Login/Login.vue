@@ -41,7 +41,6 @@ export default {
       if (!password) return this.$message.error("请输入密码");
 
       const res = await this.$http.post("/login", this.formData);
-      // console.log(res);
       if (res) {
         localStorage.token = res.data.token;
         this.$router.replace("/");

@@ -12,13 +12,28 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Utils from "../../utils/utils";
+
 export default {
   name: "mycontent",
   data() {
     return {
       pageheight: window.innerHeight - 50 - 20 - 1
     };
+  },
+  methods: {
+    // 节流
+    throttle(callBack, time) {
+      let timer = null;
+      //timer状态要常驻内存，这里做了一个闭包
+      return function() {
+        if (!timer) {
+          timer = setTimeout(() => {
+            callBack();
+            timer = null;
+          }, time);
+        }
+      };
+    }
   },
   mounted() {
     /**
@@ -28,7 +43,7 @@ export default {
      */
     window.addEventListener(
       "resize",
-      Utils.throttle(() => {
+      this.throttle(() => {
         this.pageheight = window.innerHeight - 50 - 20 - 1;
       }, 500),
       false

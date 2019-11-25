@@ -8,22 +8,22 @@
     </section>
     <section class="header-content">
       <section class="collspan dc cursor" @click="collspan">
-        <i class="el-icon-s-unfold" v-if="!isCollapse"></i>
-        <i class="el-icon-s-fold" v-if="isCollapse"></i>
+        <i class="el-icon-s-unfold" v-if="!isCollapse" title="收起"></i>
+        <i class="el-icon-s-fold" v-if="isCollapse" title="展开"></i>
       </section>
       <div class="bread">
         <BreadCrumb></BreadCrumb>
       </div>
       <!-- 全屏 -->
       <section class="fullscreen cursor dc" @click="toggleFull">
-        <i class="el-icon-full-screen"></i>
+        <i class="el-icon-full-screen" title="全屏"></i>
       </section>
       <!-- 右侧菜单 -->
       <section class="cursor dc">
         <el-dropdown @command="handleDropLink" trigger="click">
           <span class="el-dropdown-link">
             {{userInfo.account}}
-            <i class="el-icon-arrow-down el-icon--right"></i>
+            <i class="el-icon-arrow-down el-icon--right" title="菜单"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="1">安全退出</el-dropdown-item>
@@ -39,7 +39,6 @@
 import screenfull from "screenfull";
 import { mapGetters } from "vuex";
 import BreadCrumb from "./BreadCrumb";
-import Utils from "../../utils/utils";
 
 export default {
   name: "myheader",
@@ -56,11 +55,6 @@ export default {
       isCollapse: "app/isCollapse"
     })
   },
-  created() {
-    this.userInfo = Utils.getCookie("DEFAULT_TOKEN")
-      ? JSON.parse(Utils.getCookie("DEFAULT_TOKEN"))
-      : {};
-  },
   methods: {
     collspan() {
       this.$store.commit("app/updateCollapse", !this.isCollapse);
@@ -68,7 +62,7 @@ export default {
     // 右侧下拉菜单
     handleDropLink(index) {
       if (index == 1) {
-        Utils.delCookie("DEFAULT_TOKEN");
+        localStorage.clear();
         this.$router.push("/login");
       } else if (index == 2) {
         window.open("http://www.baidu.com", "_blank");

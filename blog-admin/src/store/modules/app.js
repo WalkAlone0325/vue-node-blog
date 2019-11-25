@@ -16,7 +16,7 @@ function filterRoutes(data) {
 }
 
 const state = {
-  isCollapse: true,
+  isCollapse: false,
   routelist: []
 }
 
