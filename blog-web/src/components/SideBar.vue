@@ -1,11 +1,7 @@
 <template>
   <div class="contact-info">
     <div class="option pointer">
-      <i
-        v-if="btnFlag"
-        @click="backTop"
-        class="back-top iconfont icon-huidaodingbu"
-      ></i>
+      <i v-if="btnFlag" @click="backTop" class="back-top iconfont icon-huidaodingbu"></i>
     </div>
   </div>
 </template>

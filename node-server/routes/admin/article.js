@@ -49,10 +49,31 @@ router.put('/article/:id', async ctx => {
 router.get('/article', async ctx => {
   const total = await Article.countDocuments() // 文章总数
   const reqParam = ctx.query
+  const title = reqParam.title
+  // const resource = reqParam.resource
   const page = Number(reqParam.page) // 当前第几页
   const size = Number(reqParam.size) // 每页显示的记录条数
   // 显示符合前端分页请求的列表查询
-  const res = await Article.find().populate('tags').skip((page - 1) * size).limit(size)
+  const reg = new RegExp(title, 'i')
+  const res = await Article.find(
+    {
+      $or: [
+        { title: { $regex: reg } },
+        // { resource: { $in: resource } }
+      ],
+    },
+    {
+      // title: 0
+    },
+    {
+      populate: 'tags',
+      sort: { _id: -1 },
+      skip: (page - 1) * size,
+      limit: size
+    }
+  )
+
+  // const res = await Article.find({ title: search }).sort({ '_id': -1 }).populate('tags').skip((page - 1) * size).limit(size)
   //是否还有更多
   const hasMore = total - (page - 1) * size > size ? true : false
   ctx.response.type = 'application/json'

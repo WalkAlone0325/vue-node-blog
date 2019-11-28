@@ -1,11 +1,37 @@
 <template>
   <div class="articlelist-page">
     <h2>文章列表</h2>
-    <el-button
-      style="margin-left: 20px;"
-      type="primary"
-      @click="$router.replace('/article/edit')"
-    >写文章</el-button>
+    <el-form :inline="true">
+      <el-form-item label="标题">
+        <el-input
+          type="text"
+          placeholder="请输入要查询的字段"
+          clearable
+          v-model.trim="searchData.title"
+          style="width:200px"
+        ></el-input>
+      </el-form-item>
+      <!-- <el-form-item label="状态">
+        <el-select v-model="searchData.resource" placeholder="请选择状态">
+          <el-option label="草稿" value="0"></el-option>
+          <el-option label="发表" value="1"></el-option>
+        </el-select>
+      </el-form-item>-->
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" @click="onSearch">搜索</el-button>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          icon="el-icon-circle-plus"
+          style="margin-left: 20px;"
+          type="primary"
+          @click="$router.replace('/article/edit')"
+        >写文章</el-button>
+      </el-form-item>
+      <!-- <el-form-item style="float: right;margin-right:0">
+        <el-button type="primary" @click="openAdd">新建</el-button>
+      </el-form-item>-->
+    </el-form>
 
     <!-- 表格数据列表 -->
     <el-table :data="articleLists" border style="margin-top: 20px" v-loading="listLoading">
@@ -69,7 +95,7 @@
       :page-size="size"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
-    >></el-pagination>
+    ></el-pagination>
   </div>
 </template>
 
@@ -83,10 +109,20 @@ export default {
       page: 1, // 当前页数
       size: 10, // 每页的条数
       hasMore: false,
-      listLoading: false
+      listLoading: false,
+
+      searchData: {
+        title: ""
+        // resource: null
+      }
     };
   },
   methods: {
+    // 搜索文章
+    onSearch() {
+      this.page = 1;
+      this.getArticleList();
+    },
     handleSizeChange(val) {
       this.size = val;
       this.getArticleList();
@@ -126,7 +162,8 @@ export default {
       const res = await this.$http.get("/article", {
         params: {
           page: this.page,
-          size: this.size
+          size: this.size,
+          ...this.searchData
         }
       });
       this.articleLists = res.data.article;

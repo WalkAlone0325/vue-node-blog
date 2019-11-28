@@ -1,39 +1,26 @@
 <template>
   <div class="detail-page">
-    <div
-      class="detail-header"
-      :style="`background-image:url(${articleItem.image});`"
-    >
+    <div class="detail-header bg-img-ani">
+      <!-- :style="`background:url(${articleItem.image}) no-repeat;background-size:100% auto;`" -->
       <h1>{{ articleItem.title }}</h1>
-      <span class="detail-avatar"> 作者：{{ articleItem.avatar }} </span>
+      <span class="detail-avatar">作者：{{ articleItem.avatar }}</span>
       <span class="detail-avatar">
-        <span
-          v-for="item in articleItem.tags"
-          :key="item._id"
-        >
+        <span v-for="item in articleItem.tags" :key="item._id">
           <span class="detail-tag">标签：{{ item.tag }}</span>
         </span>
       </span>
-      <span class="detail-date">
-        发布时间：{{ articleItem.updated | timeFormat }}
-      </span>
+      <span class="detail-date">发布时间：{{ articleItem.updated | timeFormat }}</span>
     </div>
     <div class="detail-body">
       <div class="detail-left">
         <div class="markdown-body">
           <!-- v-html="code" -->
-          <div
-            ref="content"
-            v-html="code"
-          ></div>
+          <div ref="content" v-html="code"></div>
         </div>
       </div>
       <div class="detail-aside">
         <h3>目录</h3>
-        <div
-          class="detail-toc"
-          v-html="toc"
-        ></div>
+        <div class="detail-toc" v-html="toc"></div>
       </div>
     </div>
     <CommentComp :direct="direct" />
@@ -170,13 +157,12 @@ export default {
     align-items: center;
     flex-direction: column;
     height: 300px;
-    background: $color-grey;
     h1 {
-      color: #2095db;
+      color: $color-white;
     }
     .detail-avatar {
       margin: 10px;
-      color: #3495db;
+      color: $color-white;
       font-size: 18px;
       .fa-user {
         margin-right: 10px;
@@ -186,7 +172,7 @@ export default {
       }
     }
     .detail-date {
-      color: #2095db;
+      color: $color-white;
     }
   }
   .detail-body {
@@ -214,11 +200,18 @@ export default {
         ul {
           list-style: none;
           li {
-            margin: 4px 0 4px -30px;
+            margin: 6px 0 4px -30px;
+            padding: 2px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             a {
               text-decoration: none;
               color: #333;
-              margin: 4px 0;
+              margin: 6px 0;
+              &:hover {
+                border-bottom: 2px solid $tx-tag;
+              }
             }
           }
         }

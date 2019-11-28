@@ -12,7 +12,7 @@
       </div>
       <div class="article-content">
         <div class="content-header">
-          <h1 class="text-over">{{item.title}}</h1>
+          <h2 class="text-over">{{item.title}}</h2>
           <p>{{ item.intro }}</p>
         </div>
         <div class="content-footer">
@@ -50,7 +50,7 @@ export default {
     &:hover {
       transition: 0.4s;
       box-shadow: 5px 5px 10px #9d7bc7;
-      h1 {
+      h2 {
         color: #303236;
       }
       img {

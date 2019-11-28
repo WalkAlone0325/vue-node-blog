@@ -37,6 +37,11 @@ export default [
         component: () => import('../views/Record.vue')
       },
       {
+        path: '/friendlink',
+        name: 'friendlink',
+        component: () => import('../views/FriendlyLink.vue')
+      },
+      {
         path: '/about',
         name: 'about',
         component: () => import('../views/About.vue')

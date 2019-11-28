@@ -40,7 +40,7 @@ export default [
             path: "/page/homepage",
             name: "homepage",
             component: () => import("../views/PageAdmin/HomePage.vue"),
-            meta: { title: '首页管理', icon: 'el-icon-s-home' }
+            meta: { title: '技能管理', icon: 'el-icon-s-home' }
           },
           {
             path: "/page/project",
@@ -55,7 +55,8 @@ export default [
             meta: { title: '关于管理', icon: 'el-icon-user-solid' }
           },
         ],
-      }, {
+      },
+      {
         path: "/article",
         name: "article",
         component: () => import("../views/ArticleAdmin/Index.vue"),
@@ -98,11 +99,27 @@ export default [
         }
       },
       {
+        path: '/friendlylink',
+        name: 'friendlylink',
+        component: () => import('../views/FriendlyLink.vue'),
+        meta: {
+          title: '友情链接', icon: 'el-icon-s-promotion'
+        }
+      },
+      {
+        path: "/loginuser",
+        name: "loginuser",
+        component: () => import('../views/Login/LoginUser.vue'),
+        meta: {
+          title: '用户列表', icon: 'el-icon-user-solid'
+        }
+      },
+      {
         path: "/loginadmin",
         name: "loginadmin",
         component: () => import('../views/Login/LoginAdmin.vue'),
         meta: {
-          title: '管理员', icon: 'el-icon-user-solid'
+          title: '管理员', icon: 'el-icon-s-custom'
         }
       },
     ]

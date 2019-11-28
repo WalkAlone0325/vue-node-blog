@@ -9,13 +9,6 @@
     background-color: #000 !important;
     color: #fff !important;
   }
-  /*code*/
-  code {
-    display: inline-block;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 10px 3px 0 0;
-  }
 
   pre {
     position: relative;
@@ -29,10 +22,14 @@
     box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.4);
     color: #000;
     text-shadow: none;
-    font: 1.1rem "Microsoft YaHei", "Arial", Sans-Serif;
+    font: 1.1rem 'Microsoft YaHei', 'Arial', Sans-Serif;
     line-height: 1.6;
     code {
       color: #c0c5ce;
+      display: inline-block;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 10px 3px 0 0;
     }
   }
   pre:before {
@@ -47,7 +44,7 @@
     background: #fc625d;
     -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
     box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
-    content: " ";
+    content: ' ';
   }
   p code,
   li > code {

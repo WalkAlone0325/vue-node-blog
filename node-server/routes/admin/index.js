@@ -6,6 +6,7 @@ module.exports = app => {
   const project = require('./project')
   const record = require('./record')
   const skill = require('./skill')
+  const friendlink = require('./friendlink')
 
 
   app.use(user.routes(), user.allowedMethods())
@@ -15,4 +16,5 @@ module.exports = app => {
   app.use(record.routes(), record.allowedMethods())
   app.use(skill.routes(), skill.allowedMethods())
   app.use(tag.routes(), tag.allowedMethods())
+  app.use(friendlink.routes(), friendlink.allowedMethods())
 }

@@ -8,6 +8,7 @@ const Project = require('../../models/Project')
 const Record = require('../../models/Record')
 const Skill = require('../../models/Skill')
 const Tag = require('../../models/Tag')
+const Friendlink = require('../../models/Friendlink')
 
 router.get('/about', async ctx => {
   const res = await About.find()
@@ -81,9 +82,9 @@ router.get('/article', async ctx => {
     if (tag != '') {
       querys.tags = { $in: [tag] }
     }
-    console.log(tag, page, size)
+    // console.log(tag, page, size)
     const total = await Article.countDocuments({ resource: { $in: 1 } })
-    const res = await Article.find(querys).populate({
+    const res = await Article.find(querys).sort({ '_id': -1 }).populate({
       path: 'tags',
       select: "_id tag desc"
     }).skip((page - 1) * size).limit(size)
@@ -116,6 +117,12 @@ router.get('/archives', async ctx => {
     msg: '归档列表查询成功',
     archiveList
   }
+})
+
+// 获取友链
+router.get('/friendlink', async ctx => {
+  const friendlink = await Friendlink.find(ctx.request.body)
+  ctx.body = friendlink
 })
 
 module.exports = router

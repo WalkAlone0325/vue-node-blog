@@ -4,8 +4,8 @@
     <tag-aside @searchTag="searchTag" :total="total" :tagsList="tagsList"></tag-aside>
     <!-- 文章列表 -->
     <div class="articles-box" id="resultScroll" ref="myScrollbar">
-      <loading v-if="!articleList.length"></loading>
-      <article-item :articleList="articleList" v-else></article-item>
+      <loading v-show="isloading"></loading>
+      <article-item :articleList="articleList"></article-item>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
       hasMore: false, // 是否还有更多
       page: 1, // 当前页数
       size: 5, // 每页的条数
-      total: 0
+      total: 0,
+      isloading: true
     };
   },
   methods: {
@@ -39,7 +40,9 @@ export default {
           // 事件处理
           this.page += 1;
           // 数据请求
+          this.isloading = true;
           this.getAtricle();
+          this.isloading = false;
         }
       }
     },
@@ -49,11 +52,14 @@ export default {
       this.tag = val;
       this.page = 1;
       this.articleList = [];
+      this.isloading = true;
       this.getAtricle();
+      this.isloading = false;
     },
 
     // 获取文章列表
     async getAtricle() {
+      this.isloading = true;
       const res = await this.$http.get("/article", {
         params: {
           tag: this.tag || "",
@@ -64,6 +70,7 @@ export default {
       res.data.article.forEach(val => {
         this.articleList = [...this.articleList, val];
       });
+      this.isloading = false;
       this.total = res.data.total;
       this.hasMore = res.data.hasMore;
     },

@@ -31,13 +31,14 @@ export default {
   width: 70%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   .project-item {
     position: relative;
     width: 300px;
     height: 400px;
-    margin: 10px;
+    margin: 20px 10px;
     background: #666;
     box-shadow: 0 30px 30px rgba(0, 0, 0, 0.5);
     &:hover .img-box img {

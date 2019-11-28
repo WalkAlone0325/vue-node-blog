@@ -32,6 +32,7 @@ export default {
         { name: "归档", path: "/archives" },
         { name: "作品", path: "/project" },
         { name: "收录", path: "/record" },
+        { name: "链接", path: "/friendlink" },
         { name: "关于", path: "/about" }
       ]
     };
@@ -46,6 +47,7 @@ export default {
   top: 0;
   z-index: 999;
   background-image: $bg-img;
+  opacity: 0.9;
   header {
     width: 80%;
     height: 60px;
