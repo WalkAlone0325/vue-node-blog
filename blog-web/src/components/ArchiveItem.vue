@@ -1,14 +1,10 @@
 <template>
   <div class="arch-item">
     <div class="arch-item-title">
-      <span> <i class="fa fa-bookmark"></i> {{ title | format }}</span>
+      <span>{{ title | format }}</span>
     </div>
     <ul>
-      <router-link
-        :to="`/article/${item._id}`"
-        v-for="(item, index) in list"
-        :key="index"
-      >
+      <router-link :to="`/article/${item._id}`" v-for="(item, index) in list" :key="index">
         <li>{{ item.created.substring(0, 10) + " => " + item.title }}</li>
       </router-link>
     </ul>

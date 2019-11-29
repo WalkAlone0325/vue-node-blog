@@ -31,7 +31,6 @@ export default {
           updated: timeFormat(item.updated)
         };
       });
-      // console.log(this.archiveList);
     }
   },
   computed: {
