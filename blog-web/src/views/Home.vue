@@ -83,7 +83,6 @@ export default {
       width: 40%;
       padding: 30px;
       background: #333;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
       h1 {
         color: $color-white;
         text-transform: uppercase;

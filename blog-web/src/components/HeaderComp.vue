@@ -32,7 +32,7 @@ export default {
         { name: "归档", path: "/archives" },
         { name: "作品", path: "/project" },
         { name: "收录", path: "/record" },
-        { name: "链接", path: "/friendlink" },
+        { name: "链接", path: "/link" },
         { name: "关于", path: "/about" }
       ]
     };

@@ -30,6 +30,14 @@ export default [
         meta: { title: '首页', icon: 'el-icon-menu' }
       },
       {
+        path: "/tag",
+        name: "tag",
+        component: () => import('../views/Tag/Tag.vue'),
+        meta: {
+          title: '标签管理', icon: 'el-icon-collection-tag'
+        }
+      },
+      {
         path: "/page",
         name: "page",
         component: () => import("../views/PageAdmin/Index.vue"),
@@ -91,20 +99,31 @@ export default [
         ],
       },
       {
-        path: "/tag",
-        name: "tag",
-        component: () => import('../views/Tag.vue'),
+        path: '/link',
+        name: 'link',
+        component: () => import('../views/Link/Index.vue'),
+        redirect: '/link/friendly',
         meta: {
-          title: '标签管理', icon: 'el-icon-success'
-        }
-      },
-      {
-        path: '/friendlylink',
-        name: 'friendlylink',
-        component: () => import('../views/FriendlyLink.vue'),
-        meta: {
-          title: '友情链接', icon: 'el-icon-s-promotion'
-        }
+          title: '链接管理', icon: 'el-icon-link'
+        },
+        children: [
+          {
+            path: '/link/friendly',
+            name: 'friendly',
+            component: () => import('../views/Link/FriendlyLink.vue'),
+            meta: {
+              title: '友情链接', icon: 'el-icon-s-promotion'
+            },
+          },
+          {
+            path: '/link/tools',
+            name: 'tools',
+            component: () => import('../views/Link/ToolLink.vue'),
+            meta: {
+              title: '工具链接', icon: 'el-icon-s-tools'
+            },
+          },
+        ]
       },
       {
         path: "/loginuser",

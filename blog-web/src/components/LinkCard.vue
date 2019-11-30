@@ -14,7 +14,7 @@
     </div>
     <h2>工具：</h2>
     <div class="friendly-container">
-      <div class="link-item" v-for="itemlink in friendlylinkList" :key="itemlink._id">
+      <div class="link-item" v-for="itemlink in toolsLinkList" :key="itemlink._id">
         <a class="link-item-a" :href="itemlink.blog_url" target="_block">
           <div class="link-header">
             <img class="link-logo" :src="itemlink.blog_imgurl" alt />
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: { friendlylinkList: Array }
+  props: { friendlylinkList: Array, toolsLinkList: Array }
 };
 </script>
 

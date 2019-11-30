@@ -9,6 +9,7 @@ const Record = require('../../models/Record')
 const Skill = require('../../models/Skill')
 const Tag = require('../../models/Tag')
 const Friendlink = require('../../models/Friendlink')
+const Toollink = require('../../models/Toollink')
 
 router.get('/about', async ctx => {
   const res = await About.find()
@@ -123,6 +124,12 @@ router.get('/archives', async ctx => {
 router.get('/friendlink', async ctx => {
   const friendlink = await Friendlink.find(ctx.request.body)
   ctx.body = friendlink
+})
+
+// 获取工具链接
+router.get('/toollink', async ctx => {
+  const toollink = await Toollink.find(ctx.request.body)
+  ctx.body = toollink
 })
 
 module.exports = router

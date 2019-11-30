@@ -92,10 +92,10 @@ export default {
       rules: {
         username: [
           { required: true, message: "请输入管理员名称", trigger: "blur" },
-          { min: 3, max: 15, message: "长度在 3 到 15 个字符" },
+          { min: 3, max: 20, message: "长度在 3 到 20 个字符" },
           {
-            pattern: /^[A-Za-z0-9]+$/,
-            message: "用户名请使用字母和数字"
+            pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+            message: "用户名请使用邮箱账号"
           }
         ],
         password: [

@@ -8,14 +8,14 @@
       </transition>
     </div>
     <SideBar />
-    <!-- <EyesItem /> -->
+    <EyesItem />
     <footer-comp></footer-comp>
     <!-- </div> -->
   </div>
 </template>
 
 <script>
-// import EyesItem from "@/components/EyesItem";
+import EyesItem from "@/components/EyesItem";
 import HeaderComp from "@/components/HeaderComp.vue";
 import FooterComp from "@/components/FooterComp.vue";
 import SideBar from "@/components/SideBar.vue";
@@ -25,7 +25,7 @@ export default {
   components: {
     HeaderComp,
     FooterComp,
-    // EyesItem,
+    EyesItem,
     SideBar
   }
 };

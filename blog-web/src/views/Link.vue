@@ -1,30 +1,35 @@
 <template>
   <div class="friendly-page">
-    <FriendlyComp :friendlylinkList="friendlylinkList" />
+    <LinkCard :friendlylinkList="friendlylinkList" :toolsLinkList="toolsLinkList" />
   </div>
 </template>
 
 <script>
-import FriendlyComp from "../components/FriendlyComp";
+import LinkCard from "../components/LinkCard";
 
 export default {
   data() {
     return {
-      friendlylinkList: []
+      friendlylinkList: [],
+      toolsLinkList: []
     };
   },
   methods: {
     async getFriendlyLink() {
       const res = await this.$http("/friendlink");
       this.friendlylinkList = res.data;
-      console.log(this.friendlylinkList);
+    },
+    async getToolsLink() {
+      const res = await this.$http("/toollink");
+      this.toolsLinkList = res.data;
     }
   },
   created() {
     this.getFriendlyLink();
+    this.getToolsLink();
   },
   components: {
-    FriendlyComp
+    LinkCard
   }
 };
 </script>
