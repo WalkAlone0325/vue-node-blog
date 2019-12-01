@@ -67,7 +67,7 @@ router.get('/article', async ctx => {
     },
     {
       populate: 'tags',
-      sort: { _id: -1 },
+      sort: { updated: -1 },
       skip: (page - 1) * size,
       limit: size
     }

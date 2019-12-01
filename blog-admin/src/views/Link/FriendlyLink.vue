@@ -85,7 +85,13 @@
       <el-table-column prop="blog_url" label="地址"></el-table-column>
       <el-table-column prop="blog_imgurl" label="图标">
         <template slot-scope="scope">
-          <img :src="scope.row.blog_imgurl" alt="图标不见了" style="width: 50px; height: 50px;" />
+          <img
+            v-if="scope.row.blog_imgurl"
+            :src="scope.row.blog_imgurl"
+            alt="图标不见了"
+            style="width: 50px; height: 50px;"
+          />
+          <span v-else>没有图标</span>
         </template>
       </el-table-column>
       <el-table-column prop="created" label="创建时间">

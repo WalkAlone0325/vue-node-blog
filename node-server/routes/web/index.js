@@ -79,13 +79,12 @@ router.get('/article', async ctx => {
   try {
     let querys = {}
     querys.resource = { $in: 1 }
-    // querys.page = 
     if (tag != '') {
       querys.tags = { $in: [tag] }
     }
     // console.log(tag, page, size)
     const total = await Article.countDocuments({ resource: { $in: 1 } })
-    const res = await Article.find(querys).sort({ '_id': -1 }).populate({
+    const res = await Article.find(querys).sort({ updated: -1 }).populate({
       path: 'tags',
       select: "_id tag desc"
     }).skip((page - 1) * size).limit(size)

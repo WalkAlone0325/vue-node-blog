@@ -1,11 +1,13 @@
 <template>
   <div class="about-page">
     <div class="about-content" v-html="content"></div>
+    <FriendlyLink />
     <CommentComp :direct="direct" />
   </div>
 </template>
 
 <script>
+import FriendlyLink from "../components/FriendlyLinkCard";
 import CommentComp from "../components/CommentComp";
 
 export default {
@@ -25,7 +27,8 @@ export default {
     this.getAbout();
   },
   components: {
-    CommentComp
+    CommentComp,
+    FriendlyLink
   }
 };
 </script>

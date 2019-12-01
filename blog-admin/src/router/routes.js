@@ -126,14 +126,6 @@ export default [
         ]
       },
       {
-        path: "/loginuser",
-        name: "loginuser",
-        component: () => import('../views/Login/LoginUser.vue'),
-        meta: {
-          title: '用户列表', icon: 'el-icon-user-solid'
-        }
-      },
-      {
         path: "/loginadmin",
         name: "loginadmin",
         component: () => import('../views/Login/LoginAdmin.vue'),

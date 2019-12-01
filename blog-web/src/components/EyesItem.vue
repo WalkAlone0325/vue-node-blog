@@ -34,9 +34,10 @@ export default {
   .eye {
     width: 80px;
     height: 40px;
-    background: #3593da;
+    background: #f1f1f1;
     display: inline-block;
     margin: 5px 10px;
+    border: 1px solid #666;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
@@ -49,7 +50,7 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 10px solid #864bb1;
+      border: 10px solid #666;
     }
   }
 }

@@ -24,7 +24,9 @@
           </span>
           <span class="content-date">
             <i class="iconfont icon-shijian"></i>
-            {{ item.updated | timeFormat }}
+            发表时间：
+            <!-- {{ item.updated | timeFormat }} -->
+            <span v-time="item.updated"></span>
           </span>
         </div>
       </div>
@@ -33,6 +35,8 @@
 </template>
 
 <script>
+import "../directive/vtime";
+
 export default {
   props: { articleList: { type: Array } }
 };

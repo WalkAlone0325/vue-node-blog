@@ -1,7 +1,6 @@
 <template>
   <div class="main-page">
     <header-comp></header-comp>
-    <!-- <div class="content-cont"> -->
     <div class="main-container">
       <transition mode="out-in">
         <router-view></router-view>
@@ -10,7 +9,6 @@
     <SideBar />
     <EyesItem />
     <footer-comp></footer-comp>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -37,12 +35,9 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  // .content-cont {
-  // overflow-y: auto;
   .main-container {
     flex: 1;
     background: #f5f5f5;
   }
-  // }
 }
 </style>

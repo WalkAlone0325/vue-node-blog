@@ -6,6 +6,7 @@
     <div class="articles-box" id="resultScroll" ref="myScrollbar">
       <loading v-show="isloading"></loading>
       <article-item :articleList="articleList"></article-item>
+      <div class="articles-nomore" v-show="noMore">已经没有文章了，要不去别的页面看看...</div>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
       page: 1, // 当前页数
       size: 5, // 每页的条数
       total: 0,
+      noMore: false,
       isloading: true
     };
   },
@@ -43,6 +45,8 @@ export default {
           this.isloading = true;
           this.getAtricle();
           this.isloading = false;
+        } else {
+          this.noMore = true;
         }
       }
     },
@@ -115,9 +119,13 @@ export default {
   margin: 10px auto;
 
   .articles-box {
-    // display: flex;
-    // flex-direction: column;
     flex: 1;
+    .articles-nomore {
+      text-align: center;
+      font-weight: 600;
+      margin-top: 20px;
+      color: #8e44ad;
+    }
   }
 }
 </style>

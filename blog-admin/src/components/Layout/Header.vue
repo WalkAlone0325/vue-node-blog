@@ -1,7 +1,7 @@
 <template>
   <div class="myheader">
     <section class="logo" :class="{'minWidth':isCollapse}">
-      <a target="_blank" href="https://github.com/" class="logoLink">
+      <a target="_blank" href="http://blog.jsw0.top/" class="logoLink">
         <img src="./images/logo.jpg" alt="logo" />
         <span v-if="!isCollapse">独行的博客</span>
       </a>
@@ -65,7 +65,7 @@ export default {
         localStorage.clear();
         this.$router.push("/login");
       } else if (index == 2) {
-        window.open("http://www.baidu.com", "_blank");
+        window.open("http://blog.jsw0.top/", "_blank");
       }
     },
     // 全屏操作
