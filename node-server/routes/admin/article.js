@@ -109,7 +109,7 @@ router.post('/upload', upload.single('file'), async ctx => {
   ctx.body = {
     code: 200,
     message: '上传成功',
-    filename: 'http://localhost:3000/uploads/' + ctx.req.file.filename
+    filename: 'http://blog.jsw0.top/uploads/' + ctx.req.file.filename
   }
 })
 
