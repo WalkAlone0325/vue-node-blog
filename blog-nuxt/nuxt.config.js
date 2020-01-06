@@ -50,7 +50,7 @@ export default {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: 'http://localhost:3000/web/api' || 'http://blog.jsw0.top/web/api'
+    baseURL: 'http://blog.jsw0.top/web/api'
   },
   /*
   ** Build configuration
