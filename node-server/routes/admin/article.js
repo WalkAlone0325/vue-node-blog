@@ -112,8 +112,8 @@ var upload = multer({
   storage: MAO({
     config: {
       region: 'oss-cn-qingdao',
-      accessKeyId: 'LTAI4G7Bvnf3SQ3XpBxfq4FY',
-      accessKeySecret: 'tRD1gcDeQ242X9tMQXs7cWwY0hwJPs',
+      accessKeyId: '',
+      accessKeySecret: '',
       bucket: 'vue-node-blog',
     },
   }),
