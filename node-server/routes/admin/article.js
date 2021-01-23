@@ -1,5 +1,5 @@
 const router = require('koa-router')({
-  prefix: '/admin/api'
+  prefix: '/admin/api',
 })
 
 const Tag = require('../../models/Tag')
@@ -13,7 +13,7 @@ router.post('/article', async (ctx, next) => {
       ctx.body = {
         code: 200,
         msg: '添加成功',
-        res
+        res,
       }
     }
     return
@@ -22,7 +22,7 @@ router.post('/article', async (ctx, next) => {
   }
   ctx.body = {
     code: 500,
-    msg: '添加失败'
+    msg: '添加失败',
   }
 })
 
@@ -31,7 +31,7 @@ router.delete('/article/:id', async ctx => {
   await Article.findByIdAndDelete(ctx.params.id)
   ctx.body = {
     code: 200,
-    success: '删除成功'
+    success: '删除成功',
   }
 })
 
@@ -41,7 +41,7 @@ router.put('/article/:id', async ctx => {
   ctx.body = {
     code: 200,
     success: true,
-    data
+    data,
   }
 })
 
@@ -69,8 +69,8 @@ router.get('/article', async ctx => {
       populate: 'tags',
       sort: { updated: -1 },
       skip: (page - 1) * size,
-      limit: size
-    }
+      limit: size,
+    },
   )
 
   // const res = await Article.find({ title: search }).sort({ '_id': -1 }).populate('tags').skip((page - 1) * size).limit(size)
@@ -88,28 +88,44 @@ router.get('/article/:id', async ctx => {
 })
 
 // 上传图片
-const multer = require('koa-multer');
-//配置    
-var storage = multer.diskStorage({
-  //文件保存路径
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads/') //注意路径必须存在
-  },
-  //修改文件名称
-  filename: function (req, file, cb) {
-    var fileFormat = (file.originalname).split(".");
-    cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]);
-  }
-})
+const multer = require('koa-multer')
+// const multer = require('multer')
+const MAO = require('multer-aliyun-oss')
+//配置
+// var storage = multer.diskStorage({
+//   //文件保存路径
+//   destination: function (req, file, cb) {
+//     cb(null, 'public/uploads/') //注意路径必须存在
+//   },
+//   //修改文件名称
+//   filename: function (req, file, cb) {
+//     var fileFormat = file.originalname.split('.')
+//     cb(null, Date.now() + '.' + fileFormat[fileFormat.length - 1])
+//   },
+// })
 
 //加载配置
-var upload = multer({ storage: storage })
+// var upload = multer({ storage: storage })
+var upload = multer({
+  // dest: __dirname + '/public/uploads/',
+
+  storage: MAO({
+    config: {
+      region: 'oss-cn-qingdao',
+      accessKeyId: 'LTAI4G7Bvnf3SQ3XpBxfq4FY',
+      accessKeySecret: 'tRD1gcDeQ242X9tMQXs7cWwY0hwJPs',
+      bucket: 'vue-node-blog',
+    },
+  }),
+})
 router.post('/upload', upload.single('file'), async ctx => {
   // const file = ctx.request.file
+  console.log(ctx.req.file)
   ctx.body = {
     code: 200,
     message: '上传成功',
-    filename: 'http://blog.jsw0.top/uploads/' + ctx.req.file.filename
+    // filename: 'http://api.loner.shop/uploads/' + ctx.req.file.filename,
+    filename: ctx.req.file.url,
   }
 })
 

@@ -18,41 +18,41 @@
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       formData: {
-        username: "",
-        password: ""
-      }
-    };
+        username: '',
+        password: '',
+      },
+    }
   },
   created() {
     this.$notify({
-      title: "",
+      title: '',
       dangerouslyUseHTMLString: true,
-      message: `我的博客地址：<a style="text-decoration: none;" href="http://blog.jsw0.top" target="_blank">http://blog.jsw0.top</a>`,
-      duration: 4000
-    });
+      message: `我的博客地址：<a style="text-decoration: none;" href="http://blog.loner.shop" target="_blank">http://blog.loner.shop</a>`,
+      duration: 4000,
+    })
   },
   methods: {
     async login() {
-      const { username, password } = this.formData;
-      if (!username) return this.$message.error("请输入账号");
-      if (!password) return this.$message.error("请输入密码");
+      const { username, password } = this.formData
+      if (!username) return this.$message.error('请输入账号')
+      if (!password) return this.$message.error('请输入密码')
 
-      const res = await this.$http.post("/login", this.formData);
+      const res = await this.$http.post('/login', this.formData)
       if (res) {
-        localStorage.token = res.data.token;
-        this.$router.replace("/");
+        localStorage.token = res.data.token
+        this.$router.replace('/')
         this.$message({
-          type: "success",
-          message: "登录成功！"
-        });
+          type: 'success',
+          message: '登录成功！',
+        })
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

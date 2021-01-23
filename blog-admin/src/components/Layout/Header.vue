@@ -1,7 +1,7 @@
 <template>
   <div class="myheader">
-    <section class="logo" :class="{'minWidth':isCollapse}">
-      <a target="_blank" href="http://blog.jsw0.top/" class="logoLink">
+    <section class="logo" :class="{ minWidth: isCollapse }">
+      <a target="_blank" href="http://blog.loner.shop/" class="logoLink">
         <img src="./images/logo.jpg" alt="logo" />
         <span v-if="!isCollapse">独行的博客</span>
       </a>
@@ -22,7 +22,7 @@
       <section class="cursor dc">
         <el-dropdown @command="handleDropLink" trigger="click">
           <span class="el-dropdown-link">
-            {{userInfo.account}}
+            {{ userInfo.account }}
             <i class="el-icon-arrow-down el-icon--right" title="菜单"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -36,52 +36,52 @@
 </template>
 
 <script>
-import screenfull from "screenfull";
-import { mapGetters } from "vuex";
-import BreadCrumb from "./BreadCrumb";
+import screenfull from 'screenfull'
+import { mapGetters } from 'vuex'
+import BreadCrumb from './BreadCrumb'
 
 export default {
-  name: "myheader",
+  name: 'myheader',
   data() {
     return {
-      userInfo: {}
-    };
+      userInfo: {},
+    }
   },
   components: {
-    BreadCrumb
+    BreadCrumb,
   },
   computed: {
     ...mapGetters({
-      isCollapse: "app/isCollapse"
-    })
+      isCollapse: 'app/isCollapse',
+    }),
   },
   methods: {
     collspan() {
-      this.$store.commit("app/updateCollapse", !this.isCollapse);
+      this.$store.commit('app/updateCollapse', !this.isCollapse)
     },
     // 右侧下拉菜单
     handleDropLink(index) {
       if (index == 1) {
-        localStorage.clear();
-        this.$router.push("/login");
+        localStorage.clear()
+        this.$router.push('/login')
       } else if (index == 2) {
-        window.open("http://blog.jsw0.top/", "_blank");
+        window.open('http://blog.loner.shop/', '_blank')
       }
     },
     // 全屏操作
     toggleFull() {
       if (screenfull.isEnabled) {
-        screenfull.toggle();
+        screenfull.toggle()
       } else {
         this.$message({
-          type: "warning",
-          message: "你的浏览器不支持全屏"
-        });
-        return false;
+          type: 'warning',
+          message: '你的浏览器不支持全屏',
+        })
+        return false
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style scoped lang="scss">
