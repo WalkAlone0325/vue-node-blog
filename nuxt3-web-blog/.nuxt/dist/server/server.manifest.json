@@ -1,0 +1,29 @@
+{
+  "entry": "server.js",
+  "files": {
+    "components/article-card.js": "components/article-card.js",
+    "components/article-comp.js": "components/article-comp.js",
+    "components/loading.js": "components/loading.js",
+    "components/logo.js": "components/logo.js",
+    "components/tag-side.js": "components/tag-side.js",
+    "pages/about.js": "pages/about.js",
+    "pages/article/_id.js": "pages/article/_id.js",
+    "pages/article/index.js": "pages/article/index.js",
+    "pages/home.js": "pages/home.js",
+    "pages/index.js": "pages/index.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "components/article-card.js": "components/article-card.js.map",
+    "components/article-comp.js": "components/article-comp.js.map",
+    "components/loading.js": "components/loading.js.map",
+    "components/logo.js": "components/logo.js.map",
+    "components/tag-side.js": "components/tag-side.js.map",
+    "pages/about.js": "pages/about.js.map",
+    "pages/article/_id.js": "pages/article/_id.js.map",
+    "pages/article/index.js": "pages/article/index.js.map",
+    "pages/home.js": "pages/home.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "server.js": "server.js.map"
+  }
+}
