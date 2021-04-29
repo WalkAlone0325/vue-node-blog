@@ -1,0 +1,32 @@
+[
+  {
+    "name": "about",
+    "path": "/about",
+    "component": "E:\\\\Walker\\\\Desktop\\\\blog\\\\nuxt-web-blog\\\\pages\\\\about.vue",
+    "chunkName": "pages/about"
+  },
+  {
+    "name": "article",
+    "path": "/article",
+    "component": "E:\\\\Walker\\\\Desktop\\\\blog\\\\nuxt-web-blog\\\\pages\\\\article\\\\index.vue",
+    "chunkName": "pages/article/index"
+  },
+  {
+    "name": "home",
+    "path": "/home",
+    "component": "E:\\\\Walker\\\\Desktop\\\\blog\\\\nuxt-web-blog\\\\pages\\\\home.vue",
+    "chunkName": "pages/home"
+  },
+  {
+    "name": "article-id",
+    "path": "/article/:id",
+    "component": "E:\\\\Walker\\\\Desktop\\\\blog\\\\nuxt-web-blog\\\\pages\\\\article\\\\_id.vue",
+    "chunkName": "pages/article/_id"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "E:\\\\Walker\\\\Desktop\\\\blog\\\\nuxt-web-blog\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

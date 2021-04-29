@@ -1,0 +1,17 @@
+{
+  "ArticleCard": {
+    "description": "Auto imported from components/ArticleCard.vue"
+  },
+  "ArticleComp": {
+    "description": "Auto imported from components/ArticleComp.vue"
+  },
+  "Loading": {
+    "description": "Auto imported from components/Loading.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "TagSide": {
+    "description": "Auto imported from components/TagSide.vue"
+  }
+}
