@@ -9,21 +9,25 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        name: "keyword",
+        name: 'keyword',
         content:
-          "IT，前端，文章，博客，blog，web，程序员，vue，SSR，react，node，小程序"
+          'IT，前端，文章，博客，blog，web，程序员，vue，SSR，react，node，小程序',
       },
       {
-        hid: "description",
-        name: "description",
-        content: process.env.npm_package_description || ""
-      }
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['normalize.css', '@/assets/css/main.scss'],
+  css: [
+    'normalize.css',
+    '@/assets/font/iconfont.css',
+    '@/assets/css/main.scss',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>时间屏保</title>
+    <style>
+      body {
+        background: #0d1320;
+        overflow: hidden;
+        font-family: electronicFont;
+      }
+
+      #timer {
+        text-align: center;
+        font-size: 56vh;
+        font-weight: bold;
+        line-height: 60vh;
+        color: #e2ecfd;
+      }
+
+      #date {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 30vh;
+        font-weight: bold;
+        color: #e2ecfd;
+      }
+
+      @font-face {
+        font-family: electronicFont;
+        src: url(./DS-DIGIT.TTF);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="timer">00:00</div>
+    <div id="date">0000-00-00</div>
+
+    <script>
+      let showSymbl = true;
+      function clock() {
+        let now = new Date();
+        let year = now.getFullYear() + "";
+        let hour = now.getHours() + "";
+        let minute = now.getMinutes() + "";
+        let month = now.getMonth() + 1 + "";
+        let day = now.getDate() + "";
+        if (showSymbl) {
+          document.getElementById("timer").innerHTML = `${hour.padStart(
+            2,
+            "0"
+          )}<span>:</span>${minute.padStart(2, "0")}`;
+        } else {
+          document.getElementById("timer").innerHTML = `${hour.padStart(
+            2,
+            "0"
+          )}<span style="color:#0d1320">:</span>${minute.padStart(2, "0")}`;
+        }
+        document.getElementById(
+          "date"
+        ).innerHTML = `${year.padStart()}-${month.padStart(
+          2,
+          "0"
+        )}-${day.padStart(2, "0")}`;
+
+        showSymbl = !showSymbl;
+      }
+      clock();
+      setInterval(() => {
+        clock();
+      }, 1000);
+    </script>
+  </body>
+</html>

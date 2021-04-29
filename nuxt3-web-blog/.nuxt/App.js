@@ -2,18 +2,21 @@ import Vue from 'vue'
 import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-import NuxtError from './components/nuxt-error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
 import '..\\node_modules\\normalize.css\\normalize.css'
 
+import '..\\assets\\font\\iconfont.css'
+
 import '..\\assets\\css\\main.scss'
 
+import _3df07034 from '..\\layouts\\appFooter.vue'
 import _38441650 from '..\\layouts\\appHeader.vue'
-import _61de9218 from '..\\layouts\\BackTop.vue'
+import _02b40b90 from '..\\layouts\\backTop.vue'
 import _6f6c098b from '..\\layouts\\default.vue'
 
-const layouts = { "_appHeader": sanitizeComponent(_38441650),"_BackTop": sanitizeComponent(_61de9218),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_appFooter": sanitizeComponent(_3df07034),"_appHeader": sanitizeComponent(_38441650),"_backTop": sanitizeComponent(_02b40b90),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

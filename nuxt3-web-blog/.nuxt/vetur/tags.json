@@ -8,9 +8,6 @@
   "Loading": {
     "description": "Auto imported from components/Loading.vue"
   },
-  "Logo": {
-    "description": "Auto imported from components/Logo.vue"
-  },
   "TagSide": {
     "description": "Auto imported from components/TagSide.vue"
   }

@@ -9,5 +9,4 @@ You can directly use them in pages and other components without the need to impo
 - `<ArticleCard>` | `<article-card>` (components/ArticleCard.vue)
 - `<ArticleComp>` | `<article-comp>` (components/ArticleComp.vue)
 - `<Loading>` | `<loading>` (components/Loading.vue)
-- `<Logo>` | `<logo>` (components/Logo.vue)
 - `<TagSide>` | `<tag-side>` (components/TagSide.vue)

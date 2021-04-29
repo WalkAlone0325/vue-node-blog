@@ -112,7 +112,7 @@ var upload = multer({
   storage: MAO({
     config: {
       region: 'oss-cn-qingdao',
-      accessKeyId: '',
+      accessKeyId: '', // 此处是阿里云存储的id和key，根据自己的配置进行填写
       accessKeySecret: '',
       bucket: 'vue-node-blog',
     },
